@@ -1,0 +1,30 @@
+@import 'general';
+
+#articleList {
+	height: 100%;
+	overflow-y: scroll;
+	@include flexbox();
+	flex-direction: column;
+	.article {
+		border-bottom: 1px solid #CCCCCC;
+		padding: 40px 0;
+		margin: 0 40px;
+		color: #666666;
+		span:first-of-type {
+			color: #333333;
+			font-size: 30px;
+			font-weight: 200;
+			cursor: pointer;
+			&:hover {
+				color: #5999BF;
+			}
+		}
+		span:last-of-type {
+			float: right;
+			font-size: 13px;
+		}
+		p {
+			margin-top: 20px;
+		}
+	}
+}

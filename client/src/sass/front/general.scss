@@ -1,0 +1,23 @@
+@mixin flexbox() {
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+@mixin flex($value) {
+	-webkit-box-flex: $value;
+	-moz-box-flex: $value;
+	-webkit-flex: $value;
+	-ms-flex: $value;
+	flex: $value;
+}
+
+@mixin order($val) {
+	-webkit-box-ordinal-group: $val;
+	-moz-box-ordinal-group: $val;
+	-ms-flex-order: $val;
+	-webkit-order: $val;
+	order: $val;
+}

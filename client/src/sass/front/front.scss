@@ -1,0 +1,47 @@
+@import 'general';
+
+#front {
+	height: 100%;
+	@include flexbox();
+	#sm {
+		height: 50px;
+		width: 100%;
+		background: url('../../assets/sideBar.jpg');
+		background-position: 0 -200px;
+		color: white;
+		line-height: 50px;
+		text-align: center;
+		i {
+			float: left;
+			line-height: 50px;
+			margin-left: 10px;
+			font-size: 20px;
+		}
+		span {
+			display: inline-block;
+			margin-left: -15px;
+		}
+	}
+	.center {
+		@include flex(1 0 auto);
+		width: 70%;
+		height: 100%;
+		overflow-x: hidden;
+		footer {
+			font-size: 14px;
+			color: #787878;
+			text-align: center;
+			margin: 20px 0;
+			p:first-of-type {
+				margin-bottom: 10px;
+			}
+			a {
+				color: #2479CC;
+			}
+		}
+	}
+}
+.slide {
+	transform: translateX(240px);
+	transition: all .5s ease-in-out;
+}

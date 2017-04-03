@@ -1,0 +1,31 @@
+@import 'general';
+
+#smallLabel {
+	margin: 40px 40px 0 40px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid #CCCCCC;
+	h2 {
+		font-size: 30px;
+		font-weight: 300;
+		color: #373737;
+		margin-bottom: 20px;
+	}
+	.labelList {
+		@include flexbox();
+		flex-flow: row wrap;
+		.labelItem {
+			padding: 10px;
+			border: 1px #77ACDF solid;
+			border-radius: 3px;
+			cursor: pointer;
+			color: #77ACDF;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			&:hover {
+				color: #2B74C9;
+				border-color: #2B74C9;
+			}
+		}		
+	}
+
+}

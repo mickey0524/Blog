@@ -1,0 +1,86 @@
+<template>
+	<div id="sideBar">
+		<div v-if="screenWidth > 1024 || openSideBar" id="lg">
+			<p class="title">Mickey的小站</p>
+			<nav>
+				<div><i class="fa fa-home"></i><span>首页</span></div>
+				<div><i class="fa fa-file-text"></i><span>归档</span></div>
+				<div><i class="fa fa-tag"></i><span>标签</span></div>
+				<div><i class="fa fa-user"></i><span>关于</span></div>
+			</nav>
+			<div class="more-mes">
+				<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-github"></i></a>
+				<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-weibo"></i></a>
+				<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-cloud"></i></a>
+			</div>
+		</div>
+		<div v-if="screenChange" id="md">
+			<i class="fa fa-home"></i>
+			<i class="fa fa-file-text"></i>
+			<i class="fa fa-tag"></i>
+			<i class="fa fa-user"></i>
+			<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-github"></i></a>
+			<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-weibo"></i></a>
+			<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-cloud"></i></a>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		mounted () {
+			const _this = this;
+			window.onresize = () => {
+				return (() => {
+					_this.screenWidth = document.body.clientWidth;
+				})();
+			}
+			if (document.body.clientWidth <= 768) {
+				this.$emit('sm', true);
+			}
+			else {
+				this.$emit('sm', false);
+			}			
+		},
+		data () {
+			return {
+				screenWidth: document.body.clientWidth,
+				timer: false,
+				openSideBar: false
+			}
+		},
+		computed: {
+			screenChange () {
+				return this.screenWidth > 768 && this.screenWidth <= 1024;
+			}
+		},
+		methods: {
+			smcontorlSideBar (flag) {
+				this.openSideBar = flag;
+			}
+		},
+		watch: {
+			screenWidth (val) {
+				if (!this.timer) {
+					this.screenWidth = val;
+					if (val <= 768) {
+						this.$emit('sm', true);
+					}
+					else {
+						this.$emit('sm', false);
+					}
+					this.timer = true;
+					let _this = this;
+					setTimeout(function() {
+						_this.timer = false;
+					}, 100);
+				}
+				
+			}
+		}
+	}
+</script>
+
+<style lang="sass" scoped>
+	@import '../../sass/front/sideBar.scss';
+</style>

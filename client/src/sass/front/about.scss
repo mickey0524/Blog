@@ -1,0 +1,47 @@
+#about {
+	margin: 40px 40px 0 40px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid #CCCCCC;
+	color: #666666;
+	h2 {
+		font-size: 30px;
+		font-weight: 300;
+		color: #373737;
+		margin-bottom: 20px;
+	}
+	>p {
+		margin-bottom: 20px;
+	}
+	.blog-info {
+		h2 {
+			color: #2479CC;
+			font-size: 26px;
+		}
+		a {
+			color: #2479CC;
+		}
+		p {
+			margin-bottom: 20px;
+		}
+	}
+	.person-info {
+		h2 {
+			color: #2479CC;
+			font-size: 26px;
+		}
+		ul {
+			margin-bottom: 20px;
+			list-style-position: outside;
+			padding-left: 30px;
+			li {
+				margin-bottom: 10px;
+			}
+		}
+		p {
+			margin-bottom: 20px;
+		}
+		p:last-of-type {
+			margin-bottom: 0;
+		}		
+	}
+}
