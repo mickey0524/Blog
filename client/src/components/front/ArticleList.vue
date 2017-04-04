@@ -1,7 +1,7 @@
 <template>
 	<div id="articleList">
 		<div v-for="item in articleLists" class="article">
-			<span>{{ item.title }}</span>
+			<span @click="$router.push('/front/article/as')">{{ item.title }}</span>
 			<span>{{ item.createdTime }}</span>
 			<p>{{ item.header }}</p>
 		</div>

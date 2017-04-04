@@ -1,0 +1,26 @@
+#back {
+	height: 100%;
+	.top-banner {
+		width: 100%;
+		background: #344057;
+		height: 60px;
+		.demonstration {
+			color: #C0CCD9;
+			font-family: "Comic Sans MS", curslve, sans-serif;		
+			font-size: 24px;	
+			margin-right: 10px;
+		}
+		img {
+			border-radius: 100%;
+			vertical-align: middle;
+		}
+		.el-dropdown-link {
+			color: #C0CCD9;
+			font-size: 16px;
+			cursor: pointer;
+		}	
+	}
+	.center {
+		height: calc(100% - 60px);
+	}
+}

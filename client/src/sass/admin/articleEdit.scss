@@ -1,0 +1,78 @@
+#articleEdit {
+	margin-top: 20px;
+	margin-left: 40px;
+	font-weight: 300;
+	.title, .path, .mode {
+		margin-bottom: 20px;
+		span {
+			margin-right: 10px;
+		}
+	}
+	.left-right-content, .all-screen {
+		textarea {
+			resize: none;
+			overflow-y: scroll;
+			width: 100%;
+			box-sizing: border-box;
+			height: 428px;
+			padding: 20px;
+			outline: 0;
+			border: 1px solid #DCDCDC;
+			border-top-left-radius: 3px;
+			border-bottom-left-radius: 3px;
+		}
+		.show {
+			border: 1px solid #DCDCDC;
+			width: 100%;
+			height: 428px;
+			border-left: 0;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			box-sizing: border-box;
+			padding: 20px;
+			overflow-y: scroll;
+		}
+	}
+	.all-screen {
+		textarea {
+			border-radius: 3px;
+		}
+	}
+	.top-bottom-content {
+		textarea {
+			width: 100%;
+			resize: none;
+			outline: 0;
+			padding: 20px;
+			height: 214px;
+			box-sizing: border-box;
+			border: 1px solid #DCDCDC;
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+			overflow-y: scroll;
+		}
+		div {
+			margin-top: -10px;
+			width: 100%;
+			padding: 20px;
+			height: 220px;
+			box-sizing: border-box;
+			border: 1px solid #DCDCDC;
+			border-bottom-left-radius: 3px;
+			border-bottom-right-radius: 3px;
+			overflow-y: scroll;			
+		}
+	}
+	.article-info {
+		padding-left: 20px;
+		.create-time, .change-time, .label {
+			margin-bottom: 30px;
+			span {
+				display: inline-block;
+				width: 80px;
+				text-align: right;
+				margin-right: 10px;
+			}
+		}
+	}
+}

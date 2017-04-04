@@ -12,7 +12,3 @@
 		}
 	}
 </script>
-
-<style lang="sass" scoped>
-	@import '../../sass/front/index.scss';
-</style>

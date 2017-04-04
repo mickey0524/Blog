@@ -3,25 +3,25 @@
 		<div v-if="screenWidth > 1024 || openSideBar" id="lg">
 			<p class="title">Mickey的小站</p>
 			<nav>
-				<div><i class="fa fa-home"></i><span>首页</span></div>
-				<div><i class="fa fa-file-text"></i><span>归档</span></div>
-				<div><i class="fa fa-tag"></i><span>标签</span></div>
-				<div><i class="fa fa-user"></i><span>关于</span></div>
+				<div @click="$router.push('/front')"><i class="fa fa-home"></i><span>首页</span></div>
+				<div @click="$router.push('/front/archive')"><i class="fa fa-file-text"></i><span>归档</span></div>
+				<div @click="$router.push('/front/label')"><i class="fa fa-tag"></i><span>标签</span></div>
+				<div @click="$router.push('/front/about')"><i class="fa fa-user"></i><span>关于</span></div>
 			</nav>
 			<div class="more-mes">
 				<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-github"></i></a>
-				<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-weibo"></i></a>
-				<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-cloud"></i></a>
+				<a href="http://weibo.com/u/3756255342" target="_blank"><i class="fa fa-weibo"></i></a>
+				<a href="http://music.163.com/#/user/home?id=271138002" target="_blank"><i class="fa fa-cloud"></i></a>
 			</div>
 		</div>
 		<div v-if="screenChange" id="md">
-			<i class="fa fa-home"></i>
-			<i class="fa fa-file-text"></i>
-			<i class="fa fa-tag"></i>
-			<i class="fa fa-user"></i>
+			<i class="fa fa-home" @click="$router.push('/front')"></i>
+			<i class="fa fa-file-text" @click="$router.push('/front/archive')"></i>
+			<i class="fa fa-tag" @click="$router.push('/front/label')"></i>
+			<i class="fa fa-user" @click="$router.push('/front/about')"></i>
 			<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-github"></i></a>
-			<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-weibo"></i></a>
-			<a href="https://github.com/mickey0524" target="_blank"><i class="fa fa-cloud"></i></a>
+			<a href="http://weibo.com/u/3756255342" target="_blank"><i class="fa fa-weibo"></i></a>
+			<a href="http://music.163.com/#/user/home?id=271138002" target="_blank"><i class="fa fa-cloud"></i></a>
 		</div>
 	</div>
 </template>

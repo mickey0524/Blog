@@ -2,7 +2,7 @@
 	<div id="smallLabel">
 		<h2>标签</h2>
 		<div class="labelList">
-			<div class="labelItem" v-for="item in labelList">
+			<div class="labelItem" v-for="item in labelList" @click="$router.push('/front/label/ss')">
 				<p>{{ item.name }}({{ item.num }})</p>
 			</div>
 		</div>
