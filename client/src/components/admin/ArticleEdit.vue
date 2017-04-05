@@ -43,7 +43,7 @@
 				</div>
 			</el-col>
 			<el-col :span="9" class="article-info">
-				<el-button type="primary" style="margin-top: 55px; margin-left: 20px; margin-bottom: 30px;">提交更改</el-button>
+				<el-button type="primary" style="margin-top: 55px; margin-left: 20px; margin-bottom: 30px;" @click="submit">提交更改</el-button>
 				<el-button type="success" style="margin-top: 55px; margin-left: 20px; margin-bottom: 30px;">返回列表</el-button>
 				<div class="create-time">
 					<span>创建日期</span>
@@ -109,6 +109,14 @@
 		computed: {
 			markedToHtml () {
 				return marked(this.markContent);
+			}
+		},
+		methods: {
+			submit () {
+				this.$notify.info({
+					title: '消息',
+					message: '成功修改文章'
+				});
 			}
 		}
 	}

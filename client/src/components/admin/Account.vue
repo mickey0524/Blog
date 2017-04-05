@@ -14,7 +14,7 @@
 					<span>再输入新密码 : </span>
 					<input type="password">
 				</div>
-				<el-button type="primary" style="float: right;">确定</el-button>
+				<el-button type="primary" style="float: right;" @click="submit">确定</el-button>
 			</el-col>
 		</el-row>
 	</div>
@@ -22,7 +22,14 @@
 
 <script>
 	export default {
-
+		methods: {
+			submit () {
+				this.$notify.info({
+					title: '消息',
+					message: '成功修改密码'
+				});				
+			}
+		}
 	}
 </script>
 

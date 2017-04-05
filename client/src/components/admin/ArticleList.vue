@@ -2,8 +2,8 @@
 	<div id="articleList">
 		<el-table :data="articleList" height="620" border>
 			<el-table-column type="index" width="60px"></el-table-column>
-			<el-table-column prop="date" label="标题" width="300px"></el-table-column>
-			<el-table-column prop="name" label="创建日期" width="200px"></el-table-column>
+			<el-table-column prop="date" label="标题" width="250px"></el-table-column>
+			<el-table-column prop="name" label="路径" width="250px"></el-table-column>
 			<el-table-column prop="name" label="最后修改日期" width="200px"></el-table-column>
 			<el-table-column prop="tag" label="标签" width="180px" :filters="filterData" :filter-method="filterTag">
 				<template scope="scope">
