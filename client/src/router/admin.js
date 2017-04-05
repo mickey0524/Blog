@@ -1,4 +1,5 @@
 
+import Login from '../components/admin/Login.vue';
 import Back from '../components/admin/Back.vue';
 import Overview from '../components/admin/Overview.vue';
 import ArticleList from '../components/admin/ArticleList.vue';
@@ -32,5 +33,9 @@ export default [
 				component: Account				
 			}
 		]
+	},
+	{
+		path: '/manageLogin',
+		component: Login		
 	}
 ]

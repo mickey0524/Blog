@@ -108,7 +108,7 @@
 		},
 		computed: {
 			markedToHtml () {
-				return marked(this.markContent);
+				return marked(this.markContent.replace(/<!--more-->/g, ''));
 			}
 		},
 		methods: {

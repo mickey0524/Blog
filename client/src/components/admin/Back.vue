@@ -6,11 +6,11 @@
 				<img src="../../assets/avatar.jpg" width="40px" height="40px">
 			</el-col>
 			<el-col :span="4" :push="1">
-				<el-dropdown trigger="click" menu-align="start">
+				<el-dropdown trigger="click" menu-align="start" @command="handleCommand">
 					<span class="el-dropdown-link">更多操作<i class="el-icon-caret-bottom el-icon--right"></i></span>
 					<el-dropdown-menu>
-						<el-dropdown-item>博客首页</el-dropdown-item>
-						<el-dropdown-item>退出登录</el-dropdown-item>
+						<el-dropdown-item command="/front">博客首页</el-dropdown-item>
+						<el-dropdown-item command="/manageLogin">退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</el-col>
@@ -54,6 +54,11 @@
 		// 	LabelManage,
 		// 	Account
 		// }
+		methods: {
+			handleCommand (command) {
+				this.$router.push(command);
+			}
+		}
 	}
 </script>
 
