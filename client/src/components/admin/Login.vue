@@ -9,6 +9,7 @@
 				<span>密码:</span>
 				<input type="password" placeholder="请输入密码">
 			</div>
+			<button>登录</button>
 		</div>
 	</div>
 </template>

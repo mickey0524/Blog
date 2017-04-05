@@ -113,6 +113,8 @@
 		},
 		methods: {
 			submit () {
+				console.log(this.markContent);
+				console.log(this.markedToHtml);
 				this.$notify.info({
 					title: '消息',
 					message: '成功修改文章'

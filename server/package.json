@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A blog system. Based on Vue2, Koa2, MongoDB...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mickey0524/Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "6.13.2",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-es2015-node6": "0.3.0",
+    "babel-preset-stage-3": "6.5.0",
+    "bluebird": "^3.5.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^7.1.0",
+    "mongoose": "^4.9.3"
+  },
+  "bugs": {
+    "url": "https://github.com/mickey0524/Blog/issues"
+  },
+  "homepage": "https://github.com/mickey0524/Blog#readme"
+}

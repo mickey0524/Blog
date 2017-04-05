@@ -28,5 +28,22 @@
 				border-color: #96BEF1;
 			}
 		}
+		button {
+			outline: 0;
+			border: 0;
+			float: right;
+			background: transparent;
+			color: white;
+			font-size: 20px;
+			cursor: pointer;
+			border: 1px solid #C070D1;
+			padding: 10px 20px;
+			border-radius: 3px;
+			transition: all .4s ease-in-out;
+		}
+		button:hover {
+			border-color: white;
+			color: #C070D1;
+		}
 	}
 }

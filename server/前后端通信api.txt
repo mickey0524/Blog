@@ -1,0 +1,24 @@
+﻿Tag标签相关:
+
+/createTag : 创建相关标签
+参数 tagName
+返回值 { httpresult: number }
+200: 正常
+300: 标签已经存在
+400: 出错
+
+/updateTag: 更改对应标签
+参数 oldName newName
+返回值 { httpresult: number }
+200: 正常
+400：出错
+
+
+
+article相关:
+
+/createArticle : 创建文章
+参数 title pathName content markdownContent tags markdownToc
+返回值 { httpresult: number }
+200: 正常
+400：出错
