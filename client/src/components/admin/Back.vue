@@ -41,19 +41,22 @@
 </template>
 
 <script>
-	// import ArticleList from './ArticleList.vue';
-	// import Overview from './Overview.vue';
-	// import ArticleEdit from './ArticleEdit.vue';
-	// import LabelManage from './LabelManage.vue';
-	// import Account from './Account.vue';
+	import axios from 'axios';
+	import { changeTime } from '../../api/dealTime.js';
 	export default {
-		// components: {
-		// 	ArticleList,
-		// 	Overview,
-		// 	ArticleEdit,
-		// 	LabelManage,
-		// 	Account
-		// }
+		mounted () {
+			if (this.$store.state.tagList.length == 0) {
+				axios.get('http://localhost:3000/getAllTag', {})
+				.then((response) => {
+					if (response.data.httpresult == 200) {
+						for (let i in response.data.tagList) {
+							response.data.tagList[i].createdAt = changeTime(response.data.tagList[i].createdAt);
+						}
+						this.$store.commit('createTagList', response.data.tagList); 
+					}
+				})
+			}
+		},		
 		methods: {
 			handleCommand (command) {
 				this.$router.push(command);

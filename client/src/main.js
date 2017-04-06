@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './components/App.vue'
 import router from './router/index'
+import store from './store/index'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import NProgress from 'nprogress'
@@ -21,6 +22,7 @@ router.afterEach(transition => {
 
 new Vue({
   router,
+  store,
   el: '#app',
   render: h => h(App)
 })

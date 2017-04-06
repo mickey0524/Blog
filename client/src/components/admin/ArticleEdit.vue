@@ -4,11 +4,11 @@
 			<el-col :span="15">
 				<div class="title">
 					<span>标题</span>
-					<el-input placeholder="请输入内容" style="display: inline-block; width: 638px;"></el-input>
+					<el-input placeholder="请输入内容" style="display: inline-block; width: 638px;" v-model="title"></el-input>
 				</div>
 				<div class="path">
 					<span>路径</span>
-					<el-input placeholder="请输入内容" style="display: inline-block; width: 638px;"></el-input>
+					<el-input placeholder="请输入内容" style="display: inline-block; width: 638px;" v-model="pathName"></el-input>
 				</div>
 				<div class="mode">
 					<span>模式</span>
@@ -44,7 +44,7 @@
 			</el-col>
 			<el-col :span="9" class="article-info">
 				<el-button type="primary" style="margin-top: 55px; margin-left: 20px; margin-bottom: 30px;" @click="submit">提交更改</el-button>
-				<el-button type="success" style="margin-top: 55px; margin-left: 20px; margin-bottom: 30px;">返回列表</el-button>
+				<el-button type="success" style="margin-top: 55px; margin-left: 20px; margin-bottom: 30px;" @click="$router.push('/back/articleList')">返回列表</el-button>
 				<div class="create-time">
 					<span>创建日期</span>
 					<el-date-picker type="datetime"></el-date-picker>
@@ -58,7 +58,7 @@
 					<el-select multiple placeholder="请选择" v-model="label">
 						<el-option
 							v-for="item in labelOptions"
-							:label="item.label"
+							
 							:value="item.value">
 						</el-option>
 					</el-select>
@@ -70,9 +70,12 @@
 
 <script>
 	import marked from 'marked';
+	import axios from 'axios';
 	export default {
 		data () {
 			return {
+				title: '',
+				pathName: '',
 				modeOptions: [
 					{
 						value: '编辑模式',
@@ -87,34 +90,26 @@
 						label: '上下分屏'
 					}
 				],
-				labelOptions: [
-					{
-						value: 'Nodejs',
-						label: 'Nodejs'
-					},
-					{
-						value: 'ES6',
-						label: 'ES6'
-					},
-					{
-						value: 'Html5',
-						label: 'Html5'
-					}
-				],
 				markContent: '',
 				editMode: '',
 				label: ''
 			}
 		},
 		computed: {
+			labelOptions () {
+				let label = [];
+				for (let i in this.$store.state.tagList) {
+					label.push({ value: this.$store.state.tagList[i].name });
+				}
+				return label;
+			},
 			markedToHtml () {
 				return marked(this.markContent.replace(/<!--more-->/g, ''));
 			}
 		},
 		methods: {
 			submit () {
-				console.log(this.markContent);
-				console.log(this.markedToHtml);
+
 				this.$notify.info({
 					title: '消息',
 					message: '成功修改文章'

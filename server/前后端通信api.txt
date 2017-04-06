@@ -2,18 +2,28 @@
 
 /createTag : 创建相关标签
 参数 tagName
-返回值 { httpresult: number }
+返回值 { httpresult: number, tag: object }
 200: 正常
 300: 标签已经存在
 400: 出错
 
 /updateTag: 更改对应标签
 参数 oldName newName
-返回值 { httpresult: number }
+返回值 { httpresult: number, tag: object }
 200: 正常
+300: 新标签值已经存在
 400：出错
 
+/deleteTag: 删除标签
+参数 _id 
+返回值 { httpresult: number }
+200：正常
+400：出错
 
+/getAllTag：获取所有标签
+返回值 { tagList: object(array), httpresult: number }
+200：正常
+400：出错
 
 article相关:
 
