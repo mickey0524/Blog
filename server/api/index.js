@@ -13,6 +13,11 @@ function addZero(num) {
     return num < 10 ? '0' + num : String(num);
 }
 
+var leftNum = (string) => {
+    return string.replace(/[^0-9]/g, '');
+}
+
 module.exports = {
-    getNowTime
+    getNowTime,
+    leftNum
 }

@@ -22,7 +22,7 @@ let createTag = async (ctx, next) => {
 
 let updateTag = async (ctx, next) => {
     try {
-        let tagResult = await tagAction.findTag(ctx.request.newName);
+        let tagResult = await tagAction.findTag(ctx.request.body.newName);
         if (tagResult.length == 0) {
             let data = ctx.request.body;
             data.time = api.getNowTime();
@@ -48,6 +48,7 @@ let deleteTag = async (ctx, next) => {
     catch (err) {
         ctx.body = { httpresult: 400 };
     }
+    next();
 }
 
 let getAllTag = async (ctx, next) => {
@@ -59,6 +60,7 @@ let getAllTag = async (ctx, next) => {
         console.log(err);
         ctx.body = { httpresult: 400 };
     }
+    next();
 }
 
 // let getTagById = async (ctx, next) => {

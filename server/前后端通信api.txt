@@ -29,6 +29,22 @@ article相关:
 
 /createArticle : 创建文章
 参数 title pathName content markdownContent tags markdownToc
-返回值 { httpresult: number }
+返回值 { httpresult: number, article: object }
 200: 正常
+400：出错
+
+/modifyArticle : 更新文章
+返回值 { httpresult: number, article: object }
+200：正常
+400：出错
+
+/getArticleList : 获取文章列表
+返回值 { httpresult: number, articleList: object(array) }
+200：正常
+400：出错
+
+/deleteArticle : 删除文章
+参数 _id 文章的id
+返回值 { httpresult: number }
+200：正常
 400：出错

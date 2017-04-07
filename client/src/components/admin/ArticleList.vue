@@ -2,20 +2,20 @@
 	<div id="articleList">
 		<el-table :data="articleList" height="620" border>
 			<el-table-column type="index" width="60px"></el-table-column>
-			<el-table-column prop="date" label="标题" width="250px"></el-table-column>
-			<el-table-column prop="name" label="路径" width="250px"></el-table-column>
-			<el-table-column prop="name" label="最后修改日期" width="200px"></el-table-column>
-			<el-table-column prop="tag" label="标签" width="180px" :filters="filterData" :filter-method="filterTag">
+			<el-table-column prop="title" label="标题" width="250px"></el-table-column>
+			<el-table-column prop="pathName" label="路径" width="250px"></el-table-column>
+			<el-table-column prop="updatedAt" label="最后修改日期" width="200px"></el-table-column>
+			<el-table-column prop="tags" label="标签" width="180px" :filters="filterData" :filter-method="filterTag">
 				<template scope="scope">
-					<el-tag v-for="tag in scope.row.tag"
+					<el-tag v-for="tag in scope.row.tags"
 						:type="'success'" close-transition>{{ tag }}</el-tag>
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" width="200px">
 				<template scope="scope">
 					<el-button type="default" size="small">查看</el-button>
-					<el-button type="info" size="small">编辑</el-button>
-					<el-button type="danger" size="small">删除</el-button>
+					<el-button type="info" size="small" @click="editArticle(scope.$index)">编辑</el-button>
+					<el-button type="danger" size="small" @click="deleteArticle(scope.$index)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -23,122 +23,48 @@
 </template>
 
 <script>
+	import axios from 'axios'
 	export default {
-		data () {
-			return {
-				filterData: [
-					{
-						text: 'Nodejs',
-						value: 'Nodejs'
-					},
-					{
-						text: 'javascript',
-						value: 'javascript'
-					}
-				],
-				articleList: [{
-		          date: '2016-05-03',
-		          name: '王小虎',
-		          tag: ['Nodejs', 'js']
-		        }, {
-		          index: 2,
-		          date: '2016-05-02',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 3,
-		          date: '2016-05-04',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 4,
-		          date: '2016-05-01',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 5,
-		          date: '2016-05-08',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 6,
-		          date: '2016-05-06',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 7,
-		          date: '2016-05-07',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        },
-		        {
-		          index: 2,
-		          date: '2016-05-02',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 3,
-		          date: '2016-05-04',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 4,
-		          date: '2016-05-01',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 5,
-		          date: '2016-05-08',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 6,
-		          date: '2016-05-06',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 7,
-		          date: '2016-05-07',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        },
-		        {
-		          index: 2,
-		          date: '2016-05-02',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 3,
-		          date: '2016-05-04',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 4,
-		          date: '2016-05-01',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 5,
-		          date: '2016-05-08',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 6,
-		          date: '2016-05-06',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }, {
-		          index: 7,
-		          date: '2016-05-07',
-		          name: '王小虎',
-		          tag: 'Nodejs'
-		        }
-		        ]
+		computed: {
+			articleList () {
+				return this.$store.state.articleList;
+			},
+			filterData () {
+				let arr = [];
+				for (let i in this.$store.state.tagList) {
+					arr.push({
+						text: this.$store.state.tagList[i].name,
+						value: this.$store.state.tagList[i].name
+					});
+				}
+				return arr;
 			}
 		},
 		methods: {
-	        filterTag(value, row) {
+	        filterTag (value, row) {
 	        	return row.tag === value;
+	     	},
+	     	deleteArticle (index) {
+	     		axios.post('http://localhost:3000/deleteArticle', { _id: this.articleList[index]._id }, {})
+	     		.then((response) => {
+	     			if (response.data.httpresult == 200) {
+	     				this.$store.commit('deleteArticle', index);
+	     				this.$notify.info({
+	     					title: '消息',
+	     					message: '成功删除文章'
+	     				})
+	     			}
+	     			else {
+	     				this.$notify.error({
+	     					title: '错误',
+	     					message: '删除文章失败'
+	     				})
+	     			}
+	     		})
+	     	},
+	     	editArticle (index) {
+	     		this.$store.commit('changeCurSavedArticle', this.articleList[index]);
+	     		this.$router.push('/back/articleEdit');
 	     	}
 		}
 	}

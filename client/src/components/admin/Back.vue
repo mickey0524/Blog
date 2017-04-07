@@ -22,18 +22,13 @@
 					<el-submenu index="2">
 						<template slot="title"><i class="el-icon-document"></i>文章管理</template>
 						<el-menu-item index="2-1" @click="$router.push('/back/articleList')">文章列表</el-menu-item>
-						<el-menu-item index="2-2" @click="$router.push('/back/articleEdit')">添加文章</el-menu-item>
+						<el-menu-item index="2-2" @click="$router.push('/back/articleEdit')">编辑文章</el-menu-item>
 					</el-submenu>
 					<el-menu-item index="3" @click="$router.push('/back/labelManage')"><i class="el-icon-star-off"></i>标签管理</el-menu-item>
 					<el-menu-item index="4" @click="$router.push('/back/account')"><i class="el-icon-setting"></i>账号管理</el-menu-item>
 				</el-menu>
 			</el-col>
 			<el-col :span="20">
-				<!-- <ArticleEdit></ArticleEdit> -->
-				<!-- <ArticleList></ArticleList> -->
-				<!-- <Overview></Overview> -->
-				<!-- <LabelManage></LabelManage> -->
-				<!-- <Account></Account> -->
 				<router-view></router-view>
 			</el-col>
 		</el-row>
@@ -56,6 +51,16 @@
 					}
 				})
 			}
+			if (this.$store.state.articleList.length === 0) {
+				axios.get('http://localhost:3000/getArticleList', {})
+				.then((response) => {
+					for (let i in response.data.articleList) {
+						response.data.articleList[i].createdAt = changeTime(response.data.articleList[i].createdAt);
+						response.data.articleList[i].updatedAt = changeTime(response.data.articleList[i].updatedAt);
+					}
+					this.$store.commit('getArticleList', response.data.articleList);
+				})
+			} 
 		},		
 		methods: {
 			handleCommand (command) {
