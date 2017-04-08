@@ -13,7 +13,7 @@
 		span:first-of-type {
 			color: #333333;
 			font-size: 30px;
-			font-weight: 200;
+			font-weight: 300;
 			cursor: pointer;
 			&:hover {
 				color: #5999BF;
@@ -23,8 +23,15 @@
 			float: right;
 			font-size: 13px;
 		}
-		p {
+		div {
 			margin-top: 20px;
+			h1, h2, h3, h4, h5, h6 {
+				font-weight: 300;
+			}
+			a {
+				color: #2479CC;
+				cursor: pointer;
+			}
 		}
 	}
 }

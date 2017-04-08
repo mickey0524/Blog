@@ -1,4 +1,5 @@
 const tagAction = require('../model_rest/tagAction');
+const articleAction = require('../model_rest/articleAction');
 const api = require('../api/index');
 
 let createTag = async (ctx, next) => {
@@ -43,6 +44,20 @@ let updateTag = async (ctx, next) => {
 let deleteTag = async (ctx, next) => {
     try {
         await tagAction.deleteTag(ctx.request.body._id);
+        let articleList = await articleAction.getArticleList();
+        for (let i in articleList) {
+            if (articleList[i].tags.indexOf(ctx.request.body.name) !== -1) {
+                if (articleList[i].tags.length === 1) {
+                    articleAction.deleteArticle(articleList[i]._id);
+                }
+                else {
+                    let tags = articleList[i].tags.splice(articleList[i].tags.indexOf(ctx.request.body.name), 1);
+                    let article = articleList[i];
+                    article.tags = tags;
+                    articleAction.modifyArticle(article);
+                }
+            }
+        }
         ctx.body = { httpresult: 200 };
     }
     catch (err) {

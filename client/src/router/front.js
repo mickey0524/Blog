@@ -33,7 +33,7 @@ export default [
 					component: About
 				},
 				{
-					path: 'article/:articleId',
+					path: 'article/:articlePathName',
 					component: Article
 				}
 			]

@@ -6,9 +6,16 @@ var changeTime = (time) => {
 	let minute = time.slice(10, 12);
 	let second = time.slice(12, 14);
 	return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-	
+}
+
+var getMonth = (time) => {
+	time = time.split(' ');
+	time = time[0];
+	time = time.split('-');
+	return time;
 }
 
 export {
-	changeTime
+	changeTime,
+	getMonth
 }

@@ -61,11 +61,19 @@
 			},
 			deleteTag (index) {
 				let _id = this.labelList[index]._id;
-				// this.labelList.splice(index, 1);
+				let name = this.labelList[index].name;
 				this.$store.commit('deleteTag', index);
-				axios.post('http://localhost:3000/deleteTag', { _id }, {})
+				axios.post('http://localhost:3000/deleteTag', { _id, name }, {})
 				.then((response) => {
 					if (response.data.httpresult == 200) {
+						axios.get('http://localhost:3000/getArticleList', {})
+						.then((response) => {
+							for (let i in response.data.articleList) {
+								response.data.articleList[i].createdAt = changeTime(response.data.articleList[i].createdAt);
+								response.data.articleList[i].updatedAt = changeTime(response.data.articleList[i].updatedAt);
+							}
+							this.$store.commit('getArticleList', response.data.articleList);
+						})
 						this.$notify.info({
 							title: '消息',
 							message: '成功删除标签'

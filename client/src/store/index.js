@@ -25,20 +25,20 @@ export default new Vuex.Store({
 			state.tagList = tagList;
 		},
 		addTag (state, tag) {
-			state.tagList.push(tag);
+			state.tagList.unshift(tag);
 		},
 		deleteTag (state, index) {
 			state.tagList.splice(index, 1);
 		},
 		changeTag (state, obj) {
 			state.tagList.splice(obj.index, 1);
-			state.tagList.push(obj.tag);
+			state.tagList.unshift(obj.tag);
 		},
 		getArticleList (state, articleList) {
 			state.articleList = articleList;
 		},
 		addArticle (state, article) {
-			state.articleList.push(article);
+			state.articleList.unshift(article);
 		},
 		deleteArticle (state, index) {
 			state.articleList.splice(index, 1);
@@ -50,7 +50,7 @@ export default new Vuex.Store({
 					break;
 				}
 			}
-			state.articleList.push(article);
+			state.articleList.unshift(article);
 		}
 	}
 });

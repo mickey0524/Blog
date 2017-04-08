@@ -2,7 +2,7 @@
 	<div id="smallLabel">
 		<h2>标签</h2>
 		<div class="labelList">
-			<div class="labelItem" v-for="item in labelList" @click="$router.push('/front/label/ss')">
+			<div class="labelItem" v-for="item in labelList" @click="$router.push('/front/label/' + item.name)">
 				<p>{{ item.name }}({{ item.num }})</p>
 			</div>
 		</div>
@@ -11,74 +11,29 @@
 
 <script>
 	export default {
-		data () {
-			return {
-				labelList: [
-					{
-						name: 'Node.js',
-						num: 22
-					},
-					{
-						name: 'vue',
-						num: 14
-					},
-					{
-						name: '服务端渲染',
-						num: 11
-					},
-					{
-						name: 'AE',
-						num: 6
-					},
-					{
-						name: 'Node.js',
-						num: 22
-					},
-					{
-						name: 'vue',
-						num: 14
-					},
-					{
-						name: '服务端渲染',
-						num: 11
-					},
-					{
-						name: 'AE',
-						num: 6
-					},
-					{
-						name: 'Node.js',
-						num: 22
-					},
-					{
-						name: 'vue',
-						num: 14
-					},
-					{
-						name: '服务端渲染',
-						num: 11
-					},
-					{
-						name: 'AE',
-						num: 6
-					},
-					{
-						name: 'Node.js',
-						num: 22
-					},
-					{
-						name: 'vue',
-						num: 14
-					},
-					{
-						name: '服务端渲染',
-						num: 11
-					},
-					{
-						name: 'AE',
-						num: 6
+		computed: {
+			labelList () {
+				let list = [];
+				let tagNum = {};
+				for (let i in this.$store.state.tagList) {
+					for (let j in this.$store.state.articleList) {
+						if (this.$store.state.articleList[j].tags.indexOf(this.$store.state.tagList[i].name) !== -1) {
+							if (tagNum[this.$store.state.tagList[i].name]) {
+								tagNum[this.$store.state.tagList[i].name] += 1;
+							}
+							else {
+								tagNum[this.$store.state.tagList[i].name] = 1;
+							}
+						}
 					}
-				]
+				}
+				for (let i in tagNum) {
+					list.push({
+						name: i,
+						num: tagNum[i]
+					});
+				}
+				return list;
 			}
 		}
 	}

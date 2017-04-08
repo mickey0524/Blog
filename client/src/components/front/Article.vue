@@ -4,7 +4,7 @@
 			<span>{{ name }}</span>
 			<span>{{ createdTime }}</span>
 		</header>
-		<div>
+		<div v-html="content" class="entry-content">
 			
 		</div>
 	</div>
@@ -12,15 +12,26 @@
 
 <script>
 	export default {
+		mounted () {
+			let pathName = this.$route.params.articlePathName;
+			for (let i in this.$store.state.articleList) {
+				if (this.$store.state.articleList[i].pathName === pathName) {
+					this.name = this.$store.state.articleList[i].title;
+					this.createdTime = this.$store.state.articleList[i].updatedAt;
+					this.content = this.$store.state.articleList[i].markdownContent;
+				}
+			}
+		},
 		data () {
 			return {
-				name: '博客优化点：轮子之心',
-				createdTime: '2017-03-04 21:47:04'
+				name: '',
+				createdTime: '',
+				content: ''
 			}
 		}
 	}
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 	@import '../../sass/front/article.scss';
 </style>

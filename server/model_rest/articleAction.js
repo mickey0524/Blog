@@ -8,7 +8,7 @@ module.exports = {
         post.findByIdAndUpdate(data._id, data, { new: true }).exec();
     },
     getArticleList: async () => {
-        return post.find({}, { __v: false }, { sort: { updatedAt: 1 } });
+        return post.find({}, { __v: false }, { sort: { updatedAt: -1 } });
     },
     deleteArticle: async (_id) => {
         post.findByIdAndRemove(_id).exec();

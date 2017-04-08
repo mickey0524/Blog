@@ -7,12 +7,6 @@
 				<i class="fa fa-times" v-else @click="smcontorlSideBar(false)"></i>
 				<span>Mickey的小站</span>
 			</div>
-			<!-- <Index></Index> -->
-			<!-- <SmallLabel></SmallLabel> -->
-			<!-- <About></About> -->
-			<!-- <Article></Article> -->
-			<!-- <LabelContent></LabelContent> -->
-			<!-- <Archive></Archive> -->
 			<router-view></router-view>
 			<footer>
 				<p>© 2016 -  Mickey的小站  -  <a href="https://github.com/mickey0524/Blog" target="_blank">博客源码</a></p>
@@ -23,22 +17,35 @@
 </template>
 
 <script>
+	import axios from 'axios';
 	import SideBar from './SideBar.vue';
-	// import Index from './Index.vue';
-	// import SmallLabel from './SmallLabel.vue';
-	// import About from './About.vue';
-	// import Article from './Article.vue';
-	// import LabelContent from './LabelContent.vue';
-	// import Archive from './Archive.vue';
+	import { changeTime } from '../../api/dealTime.js';
 	export default {
+		mounted () {
+			if (this.$store.state.articleList.length === 0) {
+				axios.get('http://localhost:3000/getArticleList', {})
+				.then((response) => {
+					for (let i in response.data.articleList) {
+						response.data.articleList[i].createdAt = changeTime(response.data.articleList[i].createdAt);
+						response.data.articleList[i].updatedAt = changeTime(response.data.articleList[i].updatedAt);
+					}
+					this.$store.commit('getArticleList', response.data.articleList);
+				})				
+			}
+			if (this.$store.state.tagList.length == 0) {
+				axios.get('http://localhost:3000/getAllTag', {})
+				.then((response) => {
+					if (response.data.httpresult == 200) {
+						for (let i in response.data.tagList) {
+							response.data.tagList[i].createdAt = changeTime(response.data.tagList[i].createdAt);
+						}
+						this.$store.commit('createTagList', response.data.tagList); 
+					}
+				})
+			}			
+		},
 		components: {
 			SideBar
-			// Index,
-			// SmallLabel,
-			// About,
-			// Article,
-			// LabelContent,
-			// Archive
 		},
 		data () {
 			return {
