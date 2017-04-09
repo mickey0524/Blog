@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		userName: '',
 		tagList: [],
 		currentSavedArticle: {
 			_id: '',
@@ -51,6 +52,12 @@ export default new Vuex.Store({
 				}
 			}
 			state.articleList.unshift(article);
+		},
+		login (state, userName) {
+			state.userName = userName;
+		},
+		unlogin (state) {
+			state.userName = '';
 		}
 	}
 });

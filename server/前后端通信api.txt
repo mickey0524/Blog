@@ -48,3 +48,17 @@ article相关:
 返回值 { httpresult: number }
 200：正常
 400：出错
+
+account有关:
+
+/loginIn : 登录判断
+参数 userName 用户名 passWord 密码
+返回值 { login: boolean }
+true: 成功登录
+false: 登录失败
+
+/changePassWord : 修改密码
+参数 userName 用户名 passWord 新密码
+返回值 { httpresult: number }
+200：正常
+400：出错

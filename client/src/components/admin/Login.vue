@@ -3,20 +3,56 @@
 		<div class="login">
 			<div class="login-item">
 				<span>账号:</span>
-				<input type="text" placeholder="请输入账号" autofocus>
+				<input type="text" placeholder="请输入账号" autofocus v-model="userName">
 			</div>
 			<div class="login-item">
 				<span>密码:</span>
-				<input type="password" placeholder="请输入密码">
+				<input type="password" placeholder="请输入密码" v-model="passWord">
 			</div>
-			<button>登录</button>
+			<button @click="login">登录</button>
 		</div>
 	</div>
 </template>
 
 <script>
+	import axios from 'axios';
 	export default {
-
+		data () {
+			return {
+				userName: '',
+				passWord: ''
+			}
+		},
+		methods: {
+			login () {
+				if (this.userName && this.passWord) {
+					axios.post('http://localhost:3000/loginIn', { userName: this.userName, passWord: this.passWord }, {})
+					.then((response) => {
+						console.log(response.data);
+						if (response.data.login) {
+							this.$notify.info({
+								title: '消息',
+								message: '成功登录~'
+							});
+							this.$store.commit('login', this.userName);
+							this.$router.push('/back');
+						}
+						else {
+							this.$notify.error({
+								title: '错误',
+								message: '账号或者密码错误!'
+							});
+						}
+					})
+				}
+				else {
+					this.$notify.error({
+						title: '错误',
+						message: '请完善所有必填项!'
+					})
+				}
+			}
+		}
 	}
 </script>
 

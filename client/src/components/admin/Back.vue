@@ -10,7 +10,7 @@
 					<span class="el-dropdown-link">更多操作<i class="el-icon-caret-bottom el-icon--right"></i></span>
 					<el-dropdown-menu>
 						<el-dropdown-item command="/front">博客首页</el-dropdown-item>
-						<el-dropdown-item command="/manageLogin">退出登录</el-dropdown-item>
+						<el-dropdown-item command="/login">退出登录</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</el-col>
@@ -39,6 +39,16 @@
 	import axios from 'axios';
 	import { changeTime } from '../../api/dealTime.js';
 	export default {
+		beforeRouteEnter(to, from, next) {
+			next(vm => {
+				if (!vm.$store.state.userName) {
+					next('/login')
+				}
+				else {
+					next();
+				}
+			})
+		},
 		mounted () {
 			if (this.$store.state.tagList.length == 0) {
 				axios.get('http://localhost:3000/getAllTag', {})
@@ -64,6 +74,9 @@
 		},		
 		methods: {
 			handleCommand (command) {
+				if (command == '/login') {
+					this.$store.commit('unlogin');
+				}
 				this.$router.push(command);
 			}
 		}

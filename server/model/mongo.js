@@ -28,10 +28,17 @@ let tag = new Schema({
     createdAt: String
 });
 
+let account = new Schema({
+    userName: String,
+    passWord: String
+});
+
 post = mongoose.model('post', post);
 tag = mongoose.model('tag', tag);
+account = mongoose.model('account', account);
 
 module.exports = {
     post,
-    tag
+    tag,
+    account
 }
