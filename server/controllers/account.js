@@ -2,6 +2,7 @@ const accountAction = require('../model_rest/accountAction');
 
 let loginIn = async (ctx, next) => {
     try {
+        let user = await accountAction.getPassWord(ctx.request.body.userName);
         if (user[0].passWord === ctx.request.body.passWord) {
             ctx.body = { login: true };
         }

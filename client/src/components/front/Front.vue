@@ -9,7 +9,7 @@
 			</div>
 			<router-view></router-view>
 			<footer>
-				<p>© 2016 -  Mickey的小站  -  <a href="https://github.com/mickey0524/Blog" target="_blank">博客源码</a></p>
+				<p>© 2017 -  Mickey的小站  -  <a href="https://github.com/mickey0524/Blog" target="_blank">博客源码</a></p>
 				<p>Powered by  <a href="https://github.com/vuejs/vue" target="_blank">Vue2</a>  &  <a href="https://github.com/koajs/koa" target="_blank">Koa2</a></p>
 			</footer>
 		</div>

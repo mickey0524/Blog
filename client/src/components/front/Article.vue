@@ -4,13 +4,19 @@
 			<span>{{ name }}</span>
 			<span>{{ createdTime }}</span>
 		</header>
-		<div v-html="content" class="entry-content">
-			
+		<div>
+			<div class="appendix">
+				<header>文章目录</header>
+				<div id="appendix-content" class="content"></div>
+			</div>	
+			<div class="entry-content" v-html="content"></div>		
 		</div>
+
 	</div>
 </template>
 
 <script>
+	import { generateArr, buildTree } from '../../api/generateTree';
 	export default {
 		mounted () {
 			let pathName = this.$route.params.articlePathName;
@@ -21,6 +27,7 @@
 					this.content = this.$store.state.articleList[i].markdownContent;
 				}
 			}
+			document.getElementById('appendix-content').appendChild(buildTree(generateArr(this.content)));
 		},
 		data () {
 			return {

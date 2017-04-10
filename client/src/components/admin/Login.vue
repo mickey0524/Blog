@@ -7,7 +7,7 @@
 			</div>
 			<div class="login-item">
 				<span>密码:</span>
-				<input type="password" placeholder="请输入密码" v-model="passWord">
+				<input type="password" placeholder="请输入密码" v-model="passWord" @keyup.enter="login">
 			</div>
 			<button @click="login">登录</button>
 		</div>
@@ -28,7 +28,6 @@
 				if (this.userName && this.passWord) {
 					axios.post('http://localhost:3000/loginIn', { userName: this.userName, passWord: this.passWord }, {})
 					.then((response) => {
-						console.log(response.data);
 						if (response.data.login) {
 							this.$notify.info({
 								title: '消息',

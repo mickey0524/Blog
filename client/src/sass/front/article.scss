@@ -25,9 +25,39 @@
 			margin: 20px 0;
 			font-weight: 400;
 		}
-		a {
-			color: #2479CC;
-			cursor: pointer;
+
+	}
+	.appendix {
+		border: 1px solid #CCCCCC;
+		border-radius: 3px;
+		float: right;
+		padding: 10px 15px;
+		header {
+			color: #4B4949;
+			padding-bottom: 5px;
+			border-bottom: 1px solid #CCCCCC;
+		}
+		.content {
+			margin-top: -10px;
+			ul {
+				font-size: 15px;
+				font-weight: 300;
+			}
+		}
+	}
+	a {
+		color: #2479CC;
+		cursor: pointer;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#article {
+		margin: 20px 20px 0 20px;
+		.appendix {
+			float: none;
+			width: 100%;
+			box-sizing: border-box;
 		}
 	}
 }
