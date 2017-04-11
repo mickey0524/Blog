@@ -15,6 +15,7 @@
 					<el-select v-model="editMode">
 						<el-option
 							v-for="item in modeOptions"
+							key="item.value"
 							:label="item.label"
 							:value="item.value">
 						</el-option>	
@@ -59,7 +60,7 @@
 					<el-select multiple placeholder="请选择" v-model="article.tags">
 						<el-option
 							v-for="item in labelOptions"
-							
+							key="item.value"
 							:value="item.value">
 						</el-option>
 					</el-select>

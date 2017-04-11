@@ -23,11 +23,9 @@
 	export default {
 		mounted () {
 			let _this = this;
-			setTimeout(function getArticle() {
-				if (_this.$store.state.curArticleList.length === 0) {
-					getArticle();
-				}
-				else {
+			let timer = setInterval(function () {
+				if (_this.$store.state.curArticleList.length !== 0) {
+					clearInterval(timer);
 					_this.startComponent();
 				}
 			}, 1000 / 60);	

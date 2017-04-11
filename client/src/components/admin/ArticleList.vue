@@ -7,7 +7,7 @@
 			<el-table-column prop="updatedAt" label="最后修改日期" width="200px"></el-table-column>
 			<el-table-column prop="tags" label="标签" width="180px" :filters="filterData" :filter-method="filterTag">
 				<template scope="scope">
-					<el-tag v-for="tag in scope.row.tags"
+					<el-tag v-for="tag in scope.row.tags" key="tag"
 						:type="'success'" close-transition>{{ tag }}</el-tag>
 				</template>
 			</el-table-column>
