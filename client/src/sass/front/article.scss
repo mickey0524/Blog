@@ -32,6 +32,7 @@
 		border-radius: 3px;
 		float: right;
 		padding: 10px 15px;
+		margin-bottom: 20px;
 		header {
 			color: #4B4949;
 			padding-bottom: 5px;
@@ -48,6 +49,21 @@
 	a {
 		color: #2479CC;
 		cursor: pointer;
+	}
+	footer {
+		clear: both;
+		border-top: 1px solid #CCCCCC;
+		color: #2479CC;
+		font-size: 20px;
+		padding-top: 10px;
+		.lastArticle {
+			float: left;
+			cursor: pointer;
+		}
+		.nextArticle {
+			float: right;
+			cursor: pointer;
+		}
 	}
 }
 
