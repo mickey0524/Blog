@@ -22,7 +22,15 @@
 	import { generateArr, buildTree } from '../../api/generateTree';
 	export default {
 		mounted () {
-			this.startComponent();
+			let _this = this;
+			setTimeout(function getArticle() {
+				if (_this.$store.state.curArticleList.length === 0) {
+					getArticle();
+				}
+				else {
+					_this.startComponent();
+				}
+			}, 1000 / 60);	
 		},
 		data () {
 			return {
@@ -37,6 +45,7 @@
 		methods: {
 			startComponent () {
 				let pathName = this.$route.params.articlePathName;
+				//console.log(this.$store.state.curArticleList);
 				for (let i in this.$store.state.curArticleList) {
 					if (this.$store.state.curArticleList[i].pathName === pathName) {
 						this.name = this.$store.state.curArticleList[i].title;
