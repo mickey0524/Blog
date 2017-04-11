@@ -28,6 +28,7 @@
 		},
 		methods: {
 			routeToArticle (index) {
+				this.$store.commit('changeCurArticleList', this.articleLists);
 				this.$store.commit('changeArticleIndex', index);
 				this.$router.push('/front/article/' + this.articleLists[index].pathName);
 			}

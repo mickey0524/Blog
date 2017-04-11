@@ -37,11 +37,11 @@
 		methods: {
 			startComponent () {
 				let pathName = this.$route.params.articlePathName;
-				for (let i in this.$store.state.articleList) {
-					if (this.$store.state.articleList[i].pathName === pathName) {
-						this.name = this.$store.state.articleList[i].title;
-						this.createdTime = this.$store.state.articleList[i].updatedAt;
-						this.content = this.$store.state.articleList[i].markdownContent;
+				for (let i in this.$store.state.curArticleList) {
+					if (this.$store.state.curArticleList[i].pathName === pathName) {
+						this.name = this.$store.state.curArticleList[i].title;
+						this.createdTime = this.$store.state.curArticleList[i].updatedAt;
+						this.content = this.$store.state.curArticleList[i].markdownContent;
 					}
 				}
 				let treeContent = buildTree(generateArr(this.content));
@@ -58,16 +58,16 @@
 				}
 				else {
 					this.lastArticle.hasLast = true;
-					this.lastArticle.title = this.$store.state.articleList[this.$store.state.articleIndex - 1].title;
-					this.lastArticle.pathName = this.$store.state.articleList[this.$store.state.articleIndex - 1].pathName;
+					this.lastArticle.title = this.$store.state.curArticleList[this.$store.state.articleIndex - 1].title;
+					this.lastArticle.pathName = this.$store.state.curArticleList[this.$store.state.articleIndex - 1].pathName;
 				}
-				if (this.$store.state.articleIndex === this.$store.state.articleList.length - 1) {
+				if (this.$store.state.articleIndex === this.$store.state.curArticleList.length - 1) {
 					this.nextArticle.hasNext = false;
 				}
 				else {
 					this.nextArticle.hasNext = true;
-					this.nextArticle.title = this.$store.state.articleList[this.$store.state.articleIndex + 1].title;
-					this.nextArticle.pathName = this.$store.state.articleList[this.$store.state.articleIndex + 1].pathName;				
+					this.nextArticle.title = this.$store.state.curArticleList[this.$store.state.articleIndex + 1].title;
+					this.nextArticle.pathName = this.$store.state.curArticleList[this.$store.state.articleIndex + 1].pathName;				
 				}
 			},
 			routeToLast () {

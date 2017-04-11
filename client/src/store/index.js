@@ -17,7 +17,8 @@ export default new Vuex.Store({
 			createdAt: '',
 			updatedAt: ''
 		},
-		articleList: []
+		articleList: [],
+		curArticleList: []
 	},
 	mutations: {
 		changeCurSavedArticle (state, article) {
@@ -62,6 +63,9 @@ export default new Vuex.Store({
 		},
 		changeArticleIndex (state, index) {
 			state.articleIndex = index;
+		},
+		changeCurArticleList (state, articleList) {
+			state.curArticleList = articleList;
 		}
 	}
 });
