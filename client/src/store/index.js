@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		articleIndex: 0,
-		userName: '',
+		// userName: '',
 		tagList: [],
 		currentSavedArticle: {
 			_id: '',
@@ -55,12 +55,12 @@ export default new Vuex.Store({
 			}
 			state.articleList.unshift(article);
 		},
-		login (state, userName) {
-			state.userName = userName;
-		},
-		unlogin (state) {
-			state.userName = '';
-		},
+		// login (state, userName) {
+		// 	state.userName = userName;
+		// },
+		// unlogin (state) {
+		// 	state.userName = '';
+		// },
 		changeArticleIndex (state, index) {
 			state.articleIndex = index;
 		},

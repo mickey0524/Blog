@@ -41,7 +41,7 @@
 	export default {
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
-				if (!vm.$store.state.userName) {
+				if (document.cookie.userName && document.cookie.userName !== '') {
 					next('/login')
 				}
 				else {
@@ -75,7 +75,7 @@
 		methods: {
 			handleCommand (command) {
 				if (command == '/login') {
-					this.$store.commit('unlogin');
+					axios.get('http://localhost:3000/unlogin', {});
 				}
 				this.$router.push(command);
 			}
