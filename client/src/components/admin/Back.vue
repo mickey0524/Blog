@@ -17,15 +17,15 @@
 		</el-row>
 		<el-row class="center">
 			<el-col :span="4">
-				<el-menu default-active="1" style="height: 620px;">
-					<el-menu-item index="1" @click="$router.push('/back')"><i class="el-icon-date"></i>概述</el-menu-item>
+				<el-menu :default-active="$route.path" style="height: 620px;">
+					<el-menu-item index="/back" @click="$router.push('/back')"><i class="el-icon-date"></i>概述</el-menu-item>
 					<el-submenu index="2">
 						<template slot="title"><i class="el-icon-document"></i>文章管理</template>
-						<el-menu-item index="2-1" @click="$router.push('/back/articleList')">文章列表</el-menu-item>
-						<el-menu-item index="2-2" @click="$router.push('/back/articleEdit')">编辑文章</el-menu-item>
+						<el-menu-item index="/back/articleList" @click="$router.push('/back/articleList')">文章列表</el-menu-item>
+						<el-menu-item index="/back/articleEdit" @click="$router.push('/back/articleEdit')">编辑文章</el-menu-item>
 					</el-submenu>
-					<el-menu-item index="3" @click="$router.push('/back/labelManage')"><i class="el-icon-star-off"></i>标签管理</el-menu-item>
-					<el-menu-item index="4" @click="$router.push('/back/account')"><i class="el-icon-setting"></i>账号管理</el-menu-item>
+					<el-menu-item index="/back/labelManage" @click="$router.push('/back/labelManage')"><i class="el-icon-star-off"></i>标签管理</el-menu-item>
+					<el-menu-item index="/back/account" @click="$router.push('/back/account')"><i class="el-icon-setting"></i>账号管理</el-menu-item>
 				</el-menu>
 			</el-col>
 			<el-col :span="20">
@@ -41,15 +41,17 @@
 	export default {
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
+				//console.log(document.cookie);
 				if (document.cookie.userName && document.cookie.userName !== '') {
-					next('/login')
+					next('');
 				}
 				else {
-					next();
+					next('');
 				}
 			})
 		},
 		mounted () {
+			console.log(this.$route.path);
 			if (this.$store.state.tagList.length == 0) {
 				axios.get('http://localhost:3000/getAllTag', {})
 				.then((response) => {
@@ -75,7 +77,7 @@
 		methods: {
 			handleCommand (command) {
 				if (command == '/login') {
-					axios.get('http://localhost:3000/unlogin', {});
+					axios.get('http://localhost:3000/unlogin', { });
 				}
 				this.$router.push(command);
 			}
