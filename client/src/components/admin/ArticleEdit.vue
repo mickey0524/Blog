@@ -137,10 +137,15 @@
 						markdownToc: this.markedToHead,
 						tags: this.article.tags
 					};
-					if (this.article.createTime == '') {
+					if (this.article.createdAt == '' || this.article.createdAt == undefined) {
+						console.log('asd');
 						axios.post('http://localhost:3000/createArticle', data, {})
 						.then((response) => {
 							if (response.data.httpresult == 200) {
+								response.data.article.updatedAt = changeTime(response.data.article.updatedAt);
+								response.data.article.createdAt = response.data.article.updatedAt;
+								this.article.updatedAt = response.data.article.updatedAt;
+								this.article.createdAt = response.data.article.createdAt;
 								this.$store.commit('addArticle', response.data.article);
 								this.$notify.info({
 									title: '消息',
@@ -156,14 +161,16 @@
 						})
 					}
 					else {
+						console.log('dsa');
+						console.log(this.article.createdAt);
 						data._id = this.article._id;
 						data.createdAt = this.article.createdAt;
 						axios.post('http://localhost:3000/modifyArticle', data, {})
 						.then((response) => {
 							if (response.data.httpresult == 200) {			
 								response.data.article.updatedAt = changeTime(response.data.article.updatedAt);
+								response.data.article.createdAt = changeTime(response.data.article.createdAt);
 								this.article.updatedAt = response.data.article.updatedAt;
-								response.data.article.createdAt = this.article.createdAt;
 								this.$store.commit('updateArticle', response.data.article);
 								this.$notify.info({
 									title: '消息',

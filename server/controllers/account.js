@@ -20,6 +20,7 @@ let loginIn = async (ctx, next) => {
         }
     }
     catch (err) {
+        console.log(err);
         ctx.body = { login: false };
     }
     next();
@@ -37,6 +38,8 @@ let changePassWord = async (ctx, next) => {
 }
 
 let unlogin = async (ctx, next) => {
+    // ctx.response.set('Access-Control-Allow-Origin', 'http://localhost:8080');
+    // ctx.response.set('Access-Control-Allow-Credentials', true);
     ctx.cookies.set(
         'userName',
         '',
@@ -45,7 +48,9 @@ let unlogin = async (ctx, next) => {
             httpOnly: false,
             overwrite: true
         }
-    );    
+    ); 
+    ctx.status = 200;   
+    next();
 }
 
 module.exports = {

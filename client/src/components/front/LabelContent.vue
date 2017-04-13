@@ -12,7 +12,7 @@
 	export default {
 		data () {
 			return {
-				title: 'vue'
+				title: this.$route.params.tag
 			}
 		},
 		components: {

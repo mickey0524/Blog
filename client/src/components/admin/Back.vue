@@ -43,15 +43,14 @@
 			next(vm => {
 				//console.log(document.cookie);
 				if (document.cookie.userName && document.cookie.userName !== '') {
-					next('');
+					next();
 				}
 				else {
-					next('');
+					next();
 				}
 			})
 		},
 		mounted () {
-			console.log(this.$route.path);
 			if (this.$store.state.tagList.length == 0) {
 				axios.get('http://localhost:3000/getAllTag', {})
 				.then((response) => {

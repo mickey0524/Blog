@@ -1,0 +1,23 @@
+#pagination {
+	border-bottom: 1px solid #CCCCCC;
+	text-align: center;
+	padding: 20px 0;
+	margin: 0 40px;
+	span {
+		color: #2479CC;
+		cursor: pointer;
+	}
+	#last-page {
+		float: left;
+	}
+	#next-page {
+		float: right;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#pagination {
+		margin: 0 20px;
+		padding: 10px 0;
+	}
+}

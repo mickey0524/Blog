@@ -42,7 +42,7 @@
 		},
 		methods: {
 	        filterTag (value, row) {
-	        	return row.tag === value;
+	        	return row.tags.indexOf(value) !== -1;
 	     	},
 	     	deleteArticle (index) {
 	     		axios.post('http://localhost:3000/deleteArticle', { _id: this.articleList[index]._id }, {})

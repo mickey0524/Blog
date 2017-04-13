@@ -26,14 +26,13 @@
 		methods: {
 			login () {
 				if (this.userName && this.passWord) {
-					axios.post('http://localhost:3000/loginIn', { userName: this.userName, passWord: this.passWord }, {})
+					axios.post('http://localhost:3000/loginIn', { userName: this.userName, passWord: this.passWord }, { })
 					.then((response) => {
 						if (response.data.login) {
 							this.$notify.info({
 								title: '消息',
 								message: '成功登录~'
 							});
-							this.$store.commit('login', this.userName);
 							this.$router.push('/back');
 						}
 						else {

@@ -25,3 +25,5 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 > 2017/04/11：完成文章页面跳转上一篇和下一篇文章的功能，修复博客文章目录float的bug
 >
 > 2017/04/12：修复后台管理平台左边nav刷新时候active不正确的bug，使用了:default-active
+>
+> 2017/04/13：修复博客管理平台几个bug，博客前端界面增加分页，一页最多10篇文章

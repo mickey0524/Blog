@@ -1,15 +1,27 @@
 <template>
 	<div id="articleList">
-		<div v-for="(item, index) in articleLists" class="article">
+		<div v-for="(item, index) in currentPage" class="article">
 			<span @click="routeToArticle(index)">{{ item.title }}</span>
 			<span>{{ item.updatedAt }}</span>
 			<div v-html="item.markdownToc"></div>
-		</div>
+		</div>		
+		<Pagination :last-page="hasLastPage" :next-page="hasNextPage" :page-num="pageNum"></Pagination>
 	</div>
 </template>
 
 <script>
+	import Pagination from './Pagination.vue';
 	export default {
+		mounted () {
+			this.start();
+		},
+		data () {
+			return {
+				hasNextPage: false,
+				hasLastPage: false,
+				pageNum: 1
+			}
+		},
 		computed: {
 			articleLists () {
 				if (this.$route.params.tag) {
@@ -24,14 +36,60 @@
 				else {
 					return this.$store.state.articleList;
 				}
+			},
+			currentPage () {
+				if (!this.$route.query.page) {
+					if (this.articleLists.length > 10) {
+						return this.articleLists.slice(0, 10);
+					}
+					else {
+						return this.articleLists;
+					}
+				}
+				else {
+					if (this.$route.query.page === Math.ceil(this.articleLists.length / 10)) {
+						return this.articleLists.slice((this.$route.query.page - 1) * 10, this.articleLists.length);
+					}
+					else {
+						return this.articleLists.slice((this.$route.query.page - 1) * 10, this.$route.query.page * 10);
+					}
+				}
 			}
 		},
+		components: {
+			Pagination
+		},
 		methods: {
+			start () {
+				if (!this.$route.query.page) {
+					this.hasLastPage = false;
+					this.pageNum = 1;
+					if (this.articleLists.length > 10) {
+						this.hasNextPage = true;
+					}
+					else {
+						this.hasNextPage = false;
+					}
+				}
+				else {
+					this.pageNum = this.$route.query.page;
+					this.hasLastPage = true;
+					if (this.$route.query.page < Math.ceil(this.articleLists.length / 10)) {
+						this.hasNextPage = true;
+					}
+					else {
+						this.hasNextPage = false;
+					}
+				}
+			},
 			routeToArticle (index) {
 				this.$store.commit('changeCurArticleList', this.articleLists);
 				this.$store.commit('changeArticleIndex', index);
 				this.$router.push('/front/article/' + this.articleLists[index].pathName);
 			}
+		},
+		watch: {
+			'$route': 'start'
 		}
 	}
 </script>
