@@ -138,7 +138,7 @@
 						tags: this.article.tags
 					};
 					if (this.article.createdAt == '' || this.article.createdAt == undefined) {
-						console.log('asd');
+						// console.log('asd');
 						axios.post('http://localhost:3000/createArticle', data, {})
 						.then((response) => {
 							if (response.data.httpresult == 200) {
@@ -161,8 +161,8 @@
 						})
 					}
 					else {
-						console.log('dsa');
-						console.log(this.article.createdAt);
+						// console.log('dsa');
+						// console.log(this.article.createdAt);
 						data._id = this.article._id;
 						data.createdAt = this.article.createdAt;
 						axios.post('http://localhost:3000/modifyArticle', data, {})
@@ -213,6 +213,6 @@
 	}
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 	@import '../../sass/admin/articleEdit.scss';
 </style>

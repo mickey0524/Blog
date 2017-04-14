@@ -31,6 +31,15 @@
 			box-sizing: border-box;
 			padding: 20px;
 			overflow-y: scroll;
+			h1, h2, h3, h4, h5, h6 {
+				font-weight: 300;
+				color: #2479cc;
+				margin: 10px 0;
+			}
+			a {
+				cursor: pointer;
+				color: #2479cc;
+			}
 		}
 	}
 	.all-screen {
