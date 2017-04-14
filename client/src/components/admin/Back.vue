@@ -70,6 +70,7 @@
 						response.data.articleList[i].updatedAt = changeTime(response.data.articleList[i].updatedAt);
 					}
 					this.$store.commit('getArticleList', response.data.articleList);
+					this.$store.commit('changeCurArticleList', response.data.articleList);
 				})
 			} 
 		},		

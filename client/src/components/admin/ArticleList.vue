@@ -1,6 +1,6 @@
 <template>
 	<div id="articleList">
-		<el-table :data="articleList" height="620" border>
+		<el-table :data="curPage" height="540" border>
 			<el-table-column type="index" width="60px"></el-table-column>
 			<el-table-column prop="title" label="标题" width="250px"></el-table-column>
 			<el-table-column prop="pathName" label="路径" width="250px"></el-table-column>
@@ -19,14 +19,31 @@
 				</template>
 			</el-table-column>
 		</el-table>
+		<el-row>
+			<el-col :span="24">
+				<el-pagination
+					layout="prev, pager, next"
+					:total="articleList.length"
+					@current-change="handleCurrentChange"
+					:page-size="12"
+					style="margin-top: 20px; float: right; margin-right: 40px;">
+				</el-pagination>
+			</el-col>
+		</el-row>
 	</div>
 </template>
 
 <script>
 	import axios from 'axios'
 	export default {
+		data () {
+			return {
+				curPage: []	
+			}
+		},
 		computed: {
 			articleList () {
+				this.curPage = this.$store.state.articleList.length > 12 ? this.$store.state.articleList.slice(0, 12) : this.$store.state.articleList;
 				return this.$store.state.articleList;
 			},
 			filterData () {
@@ -65,6 +82,17 @@
 	     	editArticle (index) {
 	     		this.$store.commit('changeCurSavedArticle', this.articleList[index]);
 	     		this.$router.push('/back/articleEdit');
+	     	},
+	     	handleCurrentChange (value) {
+	     		let allPage = Math.ceil(this.articleList.length / 12);
+	     		console.log(allPage, value);
+	     		if (value == allPage) {
+	     			this.curPage = this.articleList.slice((value - 1) * 12, this.articleList.length);
+	     			console.log(this.curPage);
+	     		}
+	     		else {
+	     			this.curPage = this.articleList.slice((value - 1) * 12, value * 12);
+	     		}
 	     	}
 		}
 	}
