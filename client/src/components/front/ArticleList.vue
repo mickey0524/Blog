@@ -92,6 +92,9 @@
 			// 	}
 			// },
 			routeToArticle (index) {
+				if (this.$route.query.page) {
+					index = index + (parseInt(this.$route.query.page) - 1) * 10;
+				}
 				this.$store.commit('changeCurArticleList', this.articleLists);
 				this.$store.commit('changeArticleIndex', index);
 				this.$router.push('/front/article/' + this.articleLists[index].pathName);

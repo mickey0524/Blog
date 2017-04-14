@@ -13,7 +13,7 @@
 			</el-table-column>
 			<el-table-column label="操作" width="200px">
 				<template scope="scope">
-					<el-button type="default" size="small" @click="$router.push('/front/article/' + scope.row.pathName)">查看</el-button>
+					<el-button type="default" size="small" @click="checkArticle(scope.$index)">查看</el-button>
 					<el-button type="info" size="small" @click="editArticle(scope.$index)">编辑</el-button>
 					<el-button type="danger" size="small" @click="deleteArticle(scope.$index)">删除</el-button>
 				</template>
@@ -38,7 +38,8 @@
 	export default {
 		data () {
 			return {
-				curPage: []	
+				curPage: [],
+				pageNum: 1
 			}
 		},
 		computed: {
@@ -85,14 +86,19 @@
 	     	},
 	     	handleCurrentChange (value) {
 	     		let allPage = Math.ceil(this.articleList.length / 12);
-	     		console.log(allPage, value);
+	     		this.pageNum = value;
 	     		if (value == allPage) {
 	     			this.curPage = this.articleList.slice((value - 1) * 12, this.articleList.length);
-	     			console.log(this.curPage);
 	     		}
 	     		else {
 	     			this.curPage = this.articleList.slice((value - 1) * 12, value * 12);
 	     		}
+	     	},
+	     	checkArticle (index) {
+	     		index = index + (this.pageNum - 1) * 12;
+	     		let pathName = this.articleList[index].pathName;
+	     		this.$store.commit('changeArticleIndex', index);
+	     		this.$router.push('/front/article/' + pathName);
 	     	}
 		}
 	}
