@@ -12,9 +12,9 @@
 <script>
 	import Pagination from './Pagination.vue';
 	export default {
-		mounted () {
-			this.start();
-		},
+		// mounted () {
+		// 	this.start();
+		// },
 		data () {
 			return {
 				hasNextPage: false,
@@ -39,18 +39,26 @@
 			},
 			currentPage () {
 				if (!this.$route.query.page) {
+					this.hasLastPage = false;
+					this.pageNum = 1;
 					if (this.articleLists.length > 10) {
+						this.hasNextPage = true;
 						return this.articleLists.slice(0, 10);
 					}
 					else {
+						this.hasNextPage = false;
 						return this.articleLists;
 					}
 				}
 				else {
-					if (this.$route.query.page === Math.ceil(this.articleLists.length / 10)) {
+					this.pageNum = parseInt(this.$route.query.page);
+					this.hasLastPage = true;
+					if (this.pageNum === Math.ceil(this.articleLists.length / 10)) {
+						this.hasNextPage = false;
 						return this.articleLists.slice((this.$route.query.page - 1) * 10, this.articleLists.length);
 					}
 					else {
+						this.hasNextPage = true;
 						return this.articleLists.slice((this.$route.query.page - 1) * 10, this.$route.query.page * 10);
 					}
 				}
@@ -60,37 +68,38 @@
 			Pagination
 		},
 		methods: {
-			start () {
-				if (!this.$route.query.page) {
-					this.hasLastPage = false;
-					this.pageNum = 1;
-					if (this.articleLists.length > 10) {
-						this.hasNextPage = true;
-					}
-					else {
-						this.hasNextPage = false;
-					}
-				}
-				else {
-					this.pageNum = this.$route.query.page;
-					this.hasLastPage = true;
-					if (this.$route.query.page < Math.ceil(this.articleLists.length / 10)) {
-						this.hasNextPage = true;
-					}
-					else {
-						this.hasNextPage = false;
-					}
-				}
-			},
+			// start () {
+			// 	if (!this.$route.query.page) {
+			// 		this.hasLastPage = false;
+			// 		this.pageNum = 1;
+			// 		if (this.articleLists.length > 10) {
+			// 			this.hasNextPage = true;
+			// 		}
+			// 		else {
+			// 			this.hasNextPage = false;
+			// 		}
+			// 	}
+			// 	else {
+			// 		this.pageNum = this.$route.query.page;
+			// 		this.hasLastPage = true;
+			// 		console.log(Math.ceil(this.articleLists.length / 10));
+			// 		if (this.$route.query.page < Math.ceil(this.articleLists.length / 10)) {
+			// 			this.hasNextPage = true;
+			// 		}
+			// 		else {
+			// 			this.hasNextPage = false;
+			// 		}
+			// 	}
+			// },
 			routeToArticle (index) {
 				this.$store.commit('changeCurArticleList', this.articleLists);
 				this.$store.commit('changeArticleIndex', index);
 				this.$router.push('/front/article/' + this.articleLists[index].pathName);
 			}
-		},
-		watch: {
-			'$route': 'start'
 		}
+		// watch: {
+		// 	'$route': 'start'
+		// }
 	}
 </script>
 

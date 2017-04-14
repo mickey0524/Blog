@@ -11,7 +11,7 @@
 		props: ['nextPage', 'lastPage', 'pageNum'],
 		methods: {
 			ToLastPage () {
-				let num = parseInt(this.pageNum) - 1;
+				let num = this.pageNum - 1;
 				if (num === 1) {
 					if (!this.$route.params.tag) {
 						this.$router.push('/front');
@@ -21,7 +21,7 @@
 					}				
 				}
 				else {
-					if (!this.route.params.tag) {
+					if (!this.$route.params.tag) {
 						this.$router.push('/front?page=`{$num}`');
 					}
 					else {
@@ -30,7 +30,7 @@
 				}
 			},
 			ToNextPage () {
-				let num = parseInt(this.pageNum) + 1;
+				let num = this.pageNum + 1;
 				if (!this.$route.params.tag) {
 					this.$router.push('/front?page=' + num);
 				}
