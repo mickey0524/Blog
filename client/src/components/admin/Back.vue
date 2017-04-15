@@ -42,11 +42,26 @@
 		beforeRouteEnter(to, from, next) {
 			next(vm => {
 				//console.log(document.cookie);
-				if (document.cookie.userName && document.cookie.userName !== '') {
+				// if (document.cookie.userName && document.cookie.userName !== '') {
+				// 	next();
+				// }
+				// else {
+				// 	next();
+				// }
+				// axios.get('http://localhost:3000/checkLogin', {})
+				// .then((response) => {
+				// 	if (response.data.httpresult === 200) {
+				// 		next();
+				// 	}
+				// 	else {
+				// 		next('/login');
+				// 	}
+				// })
+				if (sessionStorage.getItem('userName')) {
 					next();
 				}
 				else {
-					next();
+					next('/login');
 				}
 			})
 		},
@@ -77,7 +92,7 @@
 		methods: {
 			handleCommand (command) {
 				if (command == '/login') {
-					axios.get('http://localhost:3000/unlogin', { });
+					sessionStorage.setItem('userName', '');
 				}
 				this.$router.push(command);
 			}

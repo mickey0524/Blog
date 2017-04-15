@@ -51,6 +51,7 @@
 						this.content = this.$store.state.curArticleList[i].markdownContent;
 					}
 				}
+
 				let treeContent = buildTree(generateArr(this.content));
 				document.getElementById('appendix-content').innerHTML = '';
 				if (!treeContent.innerHTML) {
@@ -60,6 +61,7 @@
 					this.hasAppendix = true;
 					document.getElementById('appendix-content').appendChild(treeContent);
 				}	
+				
 				if (this.$store.state.articleIndex === 0) {
 					this.lastArticle.hasLast = false;
 				}

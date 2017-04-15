@@ -16,6 +16,7 @@
 
 <script>
 	import axios from 'axios';
+	
 	export default {
 		data () {
 			return {
@@ -26,9 +27,10 @@
 		methods: {
 			login () {
 				if (this.userName && this.passWord) {
-					axios.post('http://localhost:3000/loginIn', { userName: this.userName, passWord: this.passWord }, { })
+					axios.post('http://localhost:3000/loginIn', { userName: this.userName, passWord: this.passWord }, {})
 					.then((response) => {
 						if (response.data.login) {
+							sessionStorage.setItem('userName', this.userName);
 							this.$notify.info({
 								title: '消息',
 								message: '成功登录~'
