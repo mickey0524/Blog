@@ -74,9 +74,9 @@
 	}
 	.article-info {
 		padding-left: 20px;
-		.create-time, .change-time, .label {
+		.create-time, .change-time, .labels {
 			margin-bottom: 30px;
-			span {
+			>span {
 				display: inline-block;
 				width: 80px;
 				text-align: right;

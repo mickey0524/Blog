@@ -55,7 +55,7 @@
 					<span>修改日期</span>
 					<el-date-picker type="datetime" v-model="article.updatedAt" disabled></el-date-picker>
 				</div>
-				<div class="label">
+				<div class="labels">
 					<span>标签</span>
 					<el-select multiple placeholder="请选择" v-model="article.tags">
 						<el-option
@@ -72,6 +72,8 @@
 
 <script>
 	import marked from 'marked';
+	import hljs from 'highlight.js';
+	import 'highlight.js/styles/atom-one-dark.css';
 	import axios from 'axios';
 	import { changeTime } from '../../api/dealTime';
 	export default {
@@ -94,7 +96,7 @@
 						label: '上下分屏'
 					}
 				],
-				editMode: '',
+				editMode: '左右分屏',
 				article: {
 					_id: '',
 					title: '',
@@ -115,6 +117,11 @@
 				return label;
 			},
 			markedToHtml () {
+				marked.setOptions({
+					hightlight: function (code) {
+						return hljs.hightlightAuto(code).value;
+					}
+				});
 				return marked(this.article.content.replace(/<!--more-->/g, ''));
 			},
 			markedToHead () {

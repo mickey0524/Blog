@@ -81,6 +81,7 @@
 	     		})
 	     	},
 	     	editArticle (index) {
+	     		index = index + (this.pageNum - 1) * 12;
 	     		this.$store.commit('changeCurSavedArticle', this.articleList[index]);
 	     		this.$router.push('/back/articleEdit');
 	     	},
