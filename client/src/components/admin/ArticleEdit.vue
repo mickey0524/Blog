@@ -34,12 +34,12 @@
 				<div class="all-screen" v-if="editMode == '编辑模式'">
 					<el-row>
 						<el-col :span="24">
-							<textarea v-model="content"></textarea>
+							<textarea v-model="article.content"></textarea>
 						</el-col>
 					</el-row>
 				</div>
 				<div class="top-bottom-content" v-if="editMode == '上下分屏'">
-					<textarea v-model="content"></textarea>
+					<textarea v-model="article.content"></textarea>
 					<div class="show" v-html="markedToHtml"></div>
 				</div>
 			</el-col>
@@ -72,8 +72,8 @@
 
 <script>
 	import marked from 'marked';
-	import hljs from 'highlight.js';
-	import 'highlight.js/styles/atom-one-dark.css';
+	// import hljs from 'highlight.js';
+	// import 'highlight.js/styles/atom-one-dark.css';
 	import axios from 'axios';
 	import { changeTime } from '../../api/dealTime';
 	export default {
@@ -117,11 +117,11 @@
 				return label;
 			},
 			markedToHtml () {
-				marked.setOptions({
-					hightlight: function (code) {
-						return hljs.hightlightAuto(code).value;
-					}
-				});
+				// marked.setOptions({
+				// 	highlight: function (code) {
+				// 		return hljs.highlightAuto(code).value;
+				// 	}
+				// });
 				return marked(this.article.content.replace(/<!--more-->/g, ''));
 			},
 			markedToHead () {
@@ -214,6 +214,10 @@
 			},
 			save () {
 				this.$store.commit('changeCurSavedArticle', this.article);
+				this.$notify.info({
+					title: '消息',
+					message: '成功保存文章~'
+				});
 			}
 
 		}

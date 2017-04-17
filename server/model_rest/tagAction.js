@@ -14,7 +14,7 @@ module.exports = {
         tag.findByIdAndRemove(id).exec();
     },
     getAllTag: async () => {
-        return tag.find({}, { _id: true, name: true, createdAt: true }, { sort: { updatedAt: -1 }});
+        return tag.find({}, { _id: true, name: true, createdAt: true }, { sort: { createdAt: -1 }});
     },
     // getTagById: async (id) => {
     //     return tag.findById(id, { _id: false, name: true, createdAt: true });
