@@ -32,7 +32,8 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 > 2017/04/15：跨域cookie获取失败，目前使用H5的sessionStorage来设置登录信息
 >
 > 2017/04/17：修复部分bug，编写readme
-
+>
+> 2017/04/26：使用highlightjs增加代码块高亮功能，增加博客界面小按钮点击返回顶部(滚动显示)
 ## 特点
 * 支持markdown编写
 * 兼容各种设备

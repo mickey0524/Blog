@@ -8,6 +8,9 @@
 				<span>Mickey的小站</span>
 			</div>
 			<router-view></router-view>
+			<div :class="{ 'hide': !isScroll }" id="arrow-up" @click="arrowUp">
+				<i class="fa fa-arrow-up"></i>
+			</div>
 			<footer>
 				<p>© 2017 -  Mickey的小站  -  <a href="https://github.com/mickey0524/Blog" target="_blank">博客源码</a></p>
 				<p>Powered by  <a href="https://github.com/vuejs/vue" target="_blank">Vue2</a>  &  <a href="https://github.com/koajs/koa" target="_blank">Koa2</a></p>
@@ -22,6 +25,7 @@
 	import { changeTime } from '../../api/dealTime.js';
 	export default {
 		mounted () {
+			document.getElementsByClassName('center')[0].addEventListener('scroll', this.scroll, false);
 			if (this.$store.state.articleList.length === 0) {
 				axios.get('http://localhost:3000/getArticleList', {})
 				.then((response) => {
@@ -51,7 +55,8 @@
 		data () {
 			return {
 				showTop: false,
-				openSideBar: false
+				openSideBar: false,
+				isScroll: false
 			}
 		},
 		methods: {
@@ -61,6 +66,18 @@
 			smcontorlSideBar (flag) {
 				this.$children[0].smcontorlSideBar(flag);
 				this.openSideBar = flag;
+			},
+			scroll () {
+				if (document.getElementsByClassName('center')[0].scrollTop > 0) {
+					this.isScroll = true;
+				}
+				else {
+					this.isScroll = false;
+				}
+			},
+			arrowUp () {
+				document.getElementsByClassName('center')[0].scrollTop = 0;
+				this.isScroll = false;
 			}
 		}
 	}

@@ -27,6 +27,27 @@
 		width: 70%;
 		height: 100%;
 		overflow-x: hidden;
+		#arrow-up {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 50px;
+			line-height: 50px;
+			border-radius: 50%;
+			background: rgba(0, 0, 0, 0.8);
+			color: #FFF;
+			text-align: center;
+			font-size: 30px;
+			cursor: pointer;
+			transition: all .4s ease-in-out;
+			-webkit-transition: all .4s ease-in-out;
+			-moz-transition: all .4s ease-in-out;
+			-ms-transition: all .4s ease-in-out;
+			-o-transition: all .4s ease-in-out;
+		}
+		.hide {
+			opacity: 0;
+		}
 		footer {
 			font-size: 14px;
 			color: #787878;
