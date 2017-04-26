@@ -18,8 +18,7 @@ export default {
 }
 </script>
 
-<style>
-    @import url("../css/animate.css");
+<style>    @import url("../css/animate.css");
     html {
       height: 100%;
     }

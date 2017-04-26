@@ -3,6 +3,13 @@
 	padding-bottom: 40px;
 	border-bottom: 1px solid #CCCCCC;
 	color: #666666;	
+	pre {
+		width: auto;
+		border: 1px solid #DCDCDC;
+		border-radius: 3px;
+		margin: 5px 130px 5px 0px;
+		padding: 5px;
+	}
 	header {
 		margin-bottom: 20px;
 		span:first-of-type {
@@ -69,6 +76,9 @@
 
 @media only screen and (max-width: 768px) {
 	#article {
+		pre {
+			margin-right: 20px;
+		}
 		margin: 20px 20px 0 20px;
 		.appendix {
 			float: none;

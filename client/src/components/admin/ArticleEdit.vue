@@ -72,10 +72,15 @@
 
 <script>
 	import marked from 'marked';
-	// import hljs from 'highlight.js';
-	// import 'highlight.js/styles/atom-one-dark.css';
+	import hljs from 'highlight.js';
+	import 'highlight.js/styles/atom-one-light.css';
 	import axios from 'axios';
 	import { changeTime } from '../../api/dealTime';
+	marked.setOptions({
+		highlight: function (code, lang, callback) {
+			return hljs.highlightAuto(code).value;
+		}
+	});
 	export default {
 		mounted () {
 			this.article = this.$store.state.currentSavedArticle;
@@ -117,11 +122,6 @@
 				return label;
 			},
 			markedToHtml () {
-				// marked.setOptions({
-				// 	highlight: function (code) {
-				// 		return hljs.highlightAuto(code).value;
-				// 	}
-				// });
 				return marked(this.article.content.replace(/<!--more-->/g, ''));
 			},
 			markedToHead () {

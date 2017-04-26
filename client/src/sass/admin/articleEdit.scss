@@ -2,6 +2,12 @@
 	margin-top: 20px;
 	margin-left: 40px;
 	font-weight: 300;
+	pre {
+		border: 1px solid #DCDCDC;
+		border-radius: 3px;
+		padding: 5px;
+		margin: 5px 0;
+	}
 	.title, .path, .mode {
 		margin-bottom: 20px;
 		span {
