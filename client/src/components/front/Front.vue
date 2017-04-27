@@ -3,8 +3,8 @@
 		<SideBar @sm="sm"></SideBar>
 		<div class="center">
 			<div v-if="showTop" id="sm" >
-				<i class="fa fa-outdent" v-if="!openSideBar" @click="smcontorlSideBar(true)"></i>
-				<i class="fa fa-times" v-else @click="smcontorlSideBar(false)"></i>
+				<i class="fa fa-outdent" v-if="!openSideBar" @click="smcontrolSideBar(true)"></i>
+				<i class="fa fa-times" v-else @click="smcontrolSideBar(false)"></i>
 				<span>Mickey的小站</span>
 			</div>
 			<router-view></router-view>
@@ -66,8 +66,9 @@
 				}
 				this.showTop = flag;
 			},
-			smcontorlSideBar (flag) {
-				this.$children[0].smcontorlSideBar(flag);
+			smcontrolSideBar (flag) {
+				// console.log(this.$children[0]);
+				this.$children[0].smcontrolSideBar(flag);
 				this.openSideBar = flag;
 			},
 			scroll () {

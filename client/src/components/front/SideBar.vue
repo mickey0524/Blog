@@ -1,6 +1,7 @@
 <template>
 	<div id="sideBar">
 		<div v-if="screenWidth > 1024 || openSideBar" id="lg">
+		<!-- <div :class="{ 'show-slideBar': screenWidth > 1024 || openSideBar }" id="lg"> -->
 			<p class="title">Mickey的小站</p>
 			<nav>
 				<div @click="$router.push('/front')"><i class="fa fa-home"></i><span>首页</span></div>
@@ -55,7 +56,7 @@
 			}
 		},
 		methods: {
-			smcontorlSideBar (flag) {
+			smcontrolSideBar (flag) {
 				this.openSideBar = flag;
 			}
 		},
