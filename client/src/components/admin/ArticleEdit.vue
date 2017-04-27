@@ -73,7 +73,7 @@
 <script>
 	import marked from 'marked';
 	import hljs from 'highlight.js';
-	import 'highlight.js/styles/atom-one-light.css';
+	import 'highlight.js/styles/atom-one-dark.css';
 	import axios from 'axios';
 	import { changeTime } from '../../api/dealTime';
 	marked.setOptions({
