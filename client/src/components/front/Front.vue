@@ -61,6 +61,9 @@
 		},
 		methods: {
 			sm (flag) {
+				if (!flag) {
+					this.openSideBar = false;
+				}
 				this.showTop = flag;
 			},
 			smcontorlSideBar (flag) {

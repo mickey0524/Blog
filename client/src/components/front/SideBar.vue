@@ -67,6 +67,7 @@
 						this.$emit('sm', true);
 					}
 					else {
+						this.openSideBar = false;
 						this.$emit('sm', false);
 					}
 					this.timer = true;
