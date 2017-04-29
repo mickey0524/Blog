@@ -36,7 +36,8 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 > 2017/04/26：使用highlightjs增加代码块高亮功能，增加博客界面小按钮点击返回顶部(滚动显示)
 >
 > 2017/04/27：修复由小屏幕点开侧边导航栏拉大屏幕宽度至大屏幕导航栏显示异常bug，增加user-scalable=0禁止移动端双击扩大页面，修改代码块显示为黑底白字（信仰！）
-
+>
+> 2017/04/29：本来想用cluster来利用多核cpu，然后就发现了pm2，简直热泪盈眶，相见恨晚(后排加鸡腿)
 ## 特点
 * 支持markdown编写
 * 兼容各种设备
@@ -79,6 +80,7 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 
 * Koa全家桶
 * vscode
+* pm2
 
 后端的管理界面我直接使用了[element ui](http://element.eleme.io/#/)这个基于vue的组件库，很强大
 
@@ -206,6 +208,7 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 * Node.js V6
 * MongoDB(Mongoose)
 * 推荐[Robomongo](https://robomongo.org/)作为数据库的可视化管理工具
+* 使用pm2管理 npm install pm2 -g
 
 **克隆远程库**
 
