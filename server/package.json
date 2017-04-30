@@ -23,7 +23,8 @@
     "koa-convert": "^1.2.0",
     "koa-cors": "0.0.16",
     "koa-router": "^7.1.0",
-    "mongoose": "^4.9.3"
+    "mongoose": "^4.9.3",
+    "redis": "^2.6.2"
   },
   "bugs": {
     "url": "https://github.com/mickey0524/Blog/issues"

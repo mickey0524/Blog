@@ -38,6 +38,8 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 > 2017/04/27：修复由小屏幕点开侧边导航栏拉大屏幕宽度至大屏幕导航栏显示异常bug，增加user-scalable=0禁止移动端双击扩大页面，修改代码块显示为黑底白字（信仰！）
 >
 > 2017/04/29：本来想用cluster来利用多核cpu，然后就发现了pm2，简直热泪盈眶，相见恨晚(后排加鸡腿)
+>
+> 2017/04/30：学习redis，明天正式投入使用
 ## 特点
 * 支持markdown编写
 * 兼容各种设备
@@ -224,7 +226,7 @@ git clone git@github.com:mickey0524/Blog.git
 
 **启动前端项目**
 
-进入到client文件夹下: npm run dev
+进入到client文件夹下: npm run dev / pm2 start start.js -i 4
 
 **生成发布**
 
