@@ -1,5 +1,6 @@
 const tagAction = require('../model_rest/tagAction');
 const articleAction = require('../model_rest/articleAction');
+const redisClient = require('../model/redis');
 const api = require('../api/index');
 
 let createTag = async (ctx, next) => {
@@ -44,7 +45,19 @@ let updateTag = async (ctx, next) => {
 let deleteTag = async (ctx, next) => {
     try {
         await tagAction.deleteTag(ctx.request.body._id);
-        let articleList = await articleAction.getArticleList();
+        // let articleList = await articleAction.getArticleList();
+        let articleList = await new Promise((resolve, reject) => {
+            redisClient.get('articleList', async (err, res) => {
+                if (res) {
+                    redisClient.del('articleList');
+                    resolve(JSON.parse(res));
+                }
+                else {
+                    resolve(await articleAction.getArticleList());
+                }
+            })
+        });
+        redisClient.del('tagList');
         for (let i in articleList) {
             if (articleList[i].tags.indexOf(ctx.request.body.name) !== -1) {
                 if (articleList[i].tags.length === 1) {
@@ -59,6 +72,7 @@ let deleteTag = async (ctx, next) => {
             }
         }
         ctx.body = { httpresult: 200 };
+        //redisClient.set('tagList', JSON.stringify(await tagAction.getAllTag()));
     }
     catch (err) {
         ctx.body = { httpresult: 400 };
@@ -68,8 +82,22 @@ let deleteTag = async (ctx, next) => {
 
 let getAllTag = async (ctx, next) => {
     try {
-        let result = await tagAction.getAllTag();
-        ctx.body = { httpresult: 200, tagList: result };
+        let tagList = await new Promise((resolve, reject) => {
+            redisClient.get('tagList', async (err, res) => {
+                if (res) {
+                    console.log('redis');
+                    redisClient.expire('tagList', 60 * 10);
+                    resolve(JSON.parse(res));
+                }
+                else {
+                    let result = await tagAction.getAllTag();
+                    redisClient.set('tagList', JSON.stringify(result));
+                    redisClient.expire('tagList', 60 * 10);
+                    resolve(result);
+                }
+            })
+        });
+        ctx.body = { httpresult: 200, tagList: tagList };   
     }
     catch (err) {
         console.log(err);
