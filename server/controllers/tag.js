@@ -72,6 +72,7 @@ let updateTag = async (ctx, next) => {
 let deleteTag = async (ctx, next) => {
     try {
         await tagAction.deleteTag(ctx.request.body._id, ctx.request.body.name);
+        ctx.body = { httpresult: 200 };
         let articleList = await redisGetArticleList();
         for (let i in articleList) {
             if (articleList[i].tags.indexOf(ctx.request.body.name) !== -1) {
@@ -86,7 +87,6 @@ let deleteTag = async (ctx, next) => {
                 }
             }
         }
-        ctx.body = { httpresult: 200 };
         let tagList = await tagAction.getAllTag();
         redisClient.set('tagList', JSON.stringify(tagList));
         redisClient.expire('tagList', 60 * 10);

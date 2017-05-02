@@ -90,6 +90,7 @@
 				}).then(({ value }) => {
 					if(value) {
 						let message = '';
+						for ()
 						axios.post('http://localhost:3000/updateTag', { oldName: this.labelList[index].name, newName: value } , {})
 						.then((response) => {
 							if (response.data.httpresult == 200) {
@@ -98,6 +99,14 @@
 								// this.labelList.push(response.data.tag);
 								this.$store.commit('changeTag', { index: index, tag: response.data.tag });
 								message = `标签更新为${value}`;
+								axios.get('http://localhost:3000/getArticleList', {})
+								.then((response) => {
+									for (let i in response.data.articleList) {
+										response.data.articleList[i].createdAt = changeTime(response.data.articleList[i].createdAt);
+										response.data.articleList[i].updatedAt = changeTime(response.data.articleList[i].updatedAt);
+									}
+									this.$store.commit('getArticleList', response.data.articleList);
+								});
 							}
 							else if (response.data.httpresult == 300) {
 								message = '标签已经存在';
