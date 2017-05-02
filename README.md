@@ -226,6 +226,10 @@ git clone git@github.com:mickey0524/Blog.git
 
 进入到server文件夹下: node start.js
 
+**启动redis**
+
+进入到redis文件夹，redis-server redis.conf
+
 **启动前端项目**
 
 进入到client文件夹下: npm run dev / pm2 start start.js -i 4
