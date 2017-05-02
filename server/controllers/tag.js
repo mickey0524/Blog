@@ -154,12 +154,12 @@ let isTagExist = async (name) => {
 let redisGetArticleList = async () => {
     let articleList = await new Promise((resolve, reject) => {
         redisClient.get('articleList', async (err, res) => {
-            // if (res) {
-            //     resolve(JSON.parse(res));
-            // }
-            // else {
+            if (res) {
+                resolve(JSON.parse(res));
+            }
+            else {
                 resolve(await articleAction.getArticleList());
-            // }
+            }
         })
     });
     return articleList;  

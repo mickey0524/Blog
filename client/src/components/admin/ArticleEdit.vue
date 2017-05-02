@@ -170,7 +170,9 @@
 					else {
 						// console.log('dsa');
 						// console.log(this.article.createdAt);
-						data._id = this.article._id;
+						if (this.article._id) {
+							data._id = this.article._id;
+						}
 						data.createdAt = this.article.createdAt;
 						axios.post('http://localhost:3000/modifyArticle', data, {})
 						.then((response) => {
