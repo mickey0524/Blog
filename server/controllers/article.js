@@ -44,7 +44,7 @@ let getArticleList = async (ctx, next) => {
 
 let deleteArticle = async (ctx, next) => {
     try {
-        await articleAction.deleteArticle(ctx.request.body._id);
+        await articleAction.deleteArticle(ctx.request.body._id, ctx.request.body.title);
         ctx.body = { httpresult: 200 };
     }
     catch (err) {

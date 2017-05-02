@@ -40,6 +40,8 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 > 2017/04/29：本来想用cluster来利用多核cpu，然后就发现了pm2，简直热泪盈眶，相见恨晚(后排加鸡腿)
 >
 > 2017/04/30：学习redis，明天正式投入使用
+>
+> 2017/05/02：增加tag部分redis
 ## 特点
 * 支持markdown编写
 * 兼容各种设备

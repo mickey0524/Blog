@@ -6,17 +6,29 @@ const api = require('../api/index');
 let createTag = async (ctx, next) => {
     let tagName = ctx.request.body.tagName;
     try {
-        let tagResult = await tagAction.findTag(tagName);
-        if (tagResult.length == 0) {
+        let tagResult = await isTagExist(tagName);
+        if (!tagResult) {
             let time = api.getNowTime();
-            await tagAction.createTag({ name: tagName, createdAt: time });
+            let createResult = await tagAction.createTag({ name: tagName, createdAt: time });
             ctx.body = { tag: { name: tagName, createdAt: time }, httpresult: 200 };
+            let tagList = await new Promise((resolve, reject) => {
+                redisClient.get('tagList', (err, res) => {
+                    resolve(JSON.parse(res));
+                })
+            });
+            tagList.unshift({
+                name: tagName,
+                createdAt: time
+            });
+            redisClient.set('tagList', JSON.stringify(tagList));     
+            redisClient.expire('tagList', 60 * 10);  
         }
         else {
             ctx.body = { httpresult: 300 }
         }
     }
     catch (err) {
+        console.log(err);
         ctx.body = { httpresult: 400 }
     }
     next();
@@ -24,12 +36,27 @@ let createTag = async (ctx, next) => {
 
 let updateTag = async (ctx, next) => {
     try {
-        let tagResult = await tagAction.findTag(ctx.request.body.newName);
-        if (tagResult.length == 0) {
+        let tagResult = await isTagExist(ctx.request.body.newName);
+        if (!tagResult) {
             let data = ctx.request.body;
             data.time = api.getNowTime();
             await tagAction.updateTag(data);
+            let articleList = await redisGetArticleList();
             ctx.body = { tag: { name: data.newName, createdAt: data.time }, httpresult: 200 };
+            for (let i in articleList) {
+                if (articleList[i].tags.indexOf(ctx.request.body.oldName) !== -1) {
+                    articleList[i].tags.splice(articleList[i].tags.indexOf(ctx.request.body.oldName), 1);
+                    articleList[i].tags.push(ctx.request.body.newName);
+                    articleAction.modifyArticle(articleList[i]);
+                }
+            }
+            let tagList = await tagAction.getAllTag();
+            //console.log(tagList);
+            redisClient.set('tagList', JSON.stringify(tagList));
+            redisClient.expire('tagList', 60 * 10);
+            articleList = await articleAction.getArticleList();
+            redisClient.set('articleList', JSON.stringify(articleList));
+            redisClient.expire('articleList', 60 * 10);
         }
         else {
             ctx.body = { httpresult: 300 };
@@ -44,24 +71,12 @@ let updateTag = async (ctx, next) => {
 
 let deleteTag = async (ctx, next) => {
     try {
-        await tagAction.deleteTag(ctx.request.body._id);
-        // let articleList = await articleAction.getArticleList();
-        let articleList = await new Promise((resolve, reject) => {
-            redisClient.get('articleList', async (err, res) => {
-                if (res) {
-                    redisClient.del('articleList');
-                    resolve(JSON.parse(res));
-                }
-                else {
-                    resolve(await articleAction.getArticleList());
-                }
-            })
-        });
-        redisClient.del('tagList');
+        await tagAction.deleteTag(ctx.request.body._id, ctx.request.body.name);
+        let articleList = await redisGetArticleList();
         for (let i in articleList) {
             if (articleList[i].tags.indexOf(ctx.request.body.name) !== -1) {
                 if (articleList[i].tags.length === 1) {
-                    articleAction.deleteArticle(articleList[i]._id);
+                    articleAction.deleteArticle(articleList[i]._id, articleList[i].title);
                 }
                 else {
                     let tags = articleList[i].tags.splice(articleList[i].tags.indexOf(ctx.request.body.name), 1);
@@ -72,7 +87,12 @@ let deleteTag = async (ctx, next) => {
             }
         }
         ctx.body = { httpresult: 200 };
-        //redisClient.set('tagList', JSON.stringify(await tagAction.getAllTag()));
+        let tagList = await tagAction.getAllTag();
+        redisClient.set('tagList', JSON.stringify(tagList));
+        redisClient.expire('tagList', 60 * 10);
+        articleList = await articleAction.getArticleList();
+        redisClient.set('articleList', JSON.stringify(articleList));
+        redisClient.expire('articleList', 60 * 10);
     }
     catch (err) {
         ctx.body = { httpresult: 400 };
@@ -106,20 +126,48 @@ let getAllTag = async (ctx, next) => {
     next();
 }
 
-// let getTagById = async (ctx, next) => {
-//     try {
-//         let result = await tagAction.getTagById(ctx.request.body._id);
-//         ctx.body = { httpresult: 200, tag: result };
-//     }
-//     catch (err) {
-//         ctx.body = { httpresult: 400 };
-//     }
-// }
+let isTagExist = async (name) => {
+    let tagResult = await new Promise((resolve, reject) => {
+        redisClient.get('tagList', async (err, res) => {
+            if (res) {
+                let obj = JSON.parse(res);
+                for (let i = 0; i < obj.length; i++) {
+                    if (obj[i].name === name) {
+                        resolve([obj[i]]);
+                    }
+                }
+                resolve([]);
+            }
+            else {
+                resolve(await tagAction.findTag(name));
+            }
+        });
+    });
+    if (tagResult.length === 0) {
+        return false;
+    }   
+    else {
+        return true;
+    }
+}
+
+let redisGetArticleList = async () => {
+    let articleList = await new Promise((resolve, reject) => {
+        redisClient.get('articleList', async (err, res) => {
+            // if (res) {
+            //     resolve(JSON.parse(res));
+            // }
+            // else {
+                resolve(await articleAction.getArticleList());
+            // }
+        })
+    });
+    return articleList;  
+}
 
 module.exports = {
     'POST /createTag': createTag,
     'POST /updateTag': updateTag,
     'POST /deleteTag': deleteTag,
-    'GET /getAllTag': getAllTag,
-    // 'POST /getTagById': getTagById
+    'GET /getAllTag': getAllTag
 }

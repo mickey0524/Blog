@@ -63,7 +63,7 @@
 	        	return row.tags.indexOf(value) !== -1;
 	     	},
 	     	deleteArticle (index) {
-	     		axios.post('http://localhost:3000/deleteArticle', { _id: this.articleList[index]._id }, {})
+	     		axios.post('http://localhost:3000/deleteArticle', { _id: this.articleList[index]._id, title: this.articleList[index].title }, {})
 	     		.then((response) => {
 	     			if (response.data.httpresult == 200) {
 	     				this.$store.commit('deleteArticle', index);
