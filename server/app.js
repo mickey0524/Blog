@@ -3,11 +3,14 @@ const bodyParser = require('koa-bodyparser');
 const convert = require('koa-convert');
 const cors = require('koa-cors');
 const controller = require('./controller');
+// const beforeRestful = require('./middleware/beforeRestful');
 const app = new Koa();
 
 app.use(convert(cors()));
 
 app.use(bodyParser());
+
+// app.use(beforeRestful);
 
 app.use(controller);
 

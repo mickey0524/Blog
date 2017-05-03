@@ -90,7 +90,6 @@
 				}).then(({ value }) => {
 					if(value) {
 						let message = '';
-						for ()
 						axios.post('http://localhost:3000/updateTag', { oldName: this.labelList[index].name, newName: value } , {})
 						.then((response) => {
 							if (response.data.httpresult == 200) {

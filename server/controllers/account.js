@@ -1,10 +1,13 @@
 const accountAction = require('../model_rest/accountAction');
+const tokenService = require('../middleware/token');
 
 let loginIn = async (ctx, next) => {
     try {
         let user = await accountAction.getPassWord(ctx.request.body.userName);
         if (user[0].passWord === ctx.request.body.passWord) {
-            ctx.body = { login: true };
+            let token = tokenService.createToken(ctx.request.body.userName);
+            // ctx.response.set('Authorization', token);
+            ctx.body = { login: true, token: token };
         }
         else {
             ctx.body = { login: false };
