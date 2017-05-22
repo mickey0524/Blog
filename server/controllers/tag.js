@@ -138,12 +138,13 @@ let getAllTag = async (ctx, next) => {
         //     })
         // });
         let tagList = await redisGetTagList();
+        // let tagList = await tagAction.getAllTag();
         ctx.body = { httpresult: 200, tagList: tagList };   
         redisClient.set('tagList', JSON.stringify(tagList));
         redisClient.expire('tagList', 60 * 10);
     }
     catch (err) {
-        console.log(err);
+        console.log(err + 'tag');
         ctx.body = { httpresult: 400 };
     }
     next();
@@ -198,7 +199,8 @@ let redisGetTagList = async () => {
                 resolve(await tagAction.getAllTag());
             }
         })
-    })
+    });
+    return tagList;
 }
 
 module.exports = {
