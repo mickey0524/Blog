@@ -4,7 +4,13 @@ const convert = require('koa-convert');
 const cors = require('koa-cors');
 const controller = require('./controller');
 // const beforeRestful = require('./middleware/beforeRestful');
+const log = require('./utils/log');
 const app = new Koa();
+
+// app.use(async (ctx, next) => {
+//     console.log(ctx.url);
+//     await next();
+// })
 
 app.use(convert(cors()));
 

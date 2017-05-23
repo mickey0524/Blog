@@ -42,6 +42,8 @@ A blog system. Based on Vue2, Koa2, MongoDB...
 > 2017/04/30：学习redis，明天正式投入使用
 >
 > 2017/05/02：后台增加redis缓存
+> 
+> 2017/05/23：后台增加log4js，持久化保存日志，随后将逐步细化日志
 ## 特点
 * 支持markdown编写
 * 兼容各种设备
